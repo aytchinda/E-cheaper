@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "85309d4524da1baae35ac151622b248f",
+    "content-hash": "bcab2b17b5e643169ec35bf2fec850ec",
     "packages": [
         {
             "name": "brick/math",
@@ -505,6 +505,61 @@
                 }
             ],
             "time": "2023-10-06T06:47:41+00:00"
+        },
+        {
+            "name": "espero-soft/artisan",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/espero-soft/artisan.git",
+                "reference": "9e05a67e835287b229be77cd21d3cc0b93de16ce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/espero-soft/artisan/zipball/9e05a67e835287b229be77cd21d3cc0b93de16ce",
+                "reference": "9e05a67e835287b229be77cd21d3cc0b93de16ce",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "*",
+                "illuminate/support": "*",
+                "php": ">=7.1"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EsperoSoft\\Artisan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Espero-Soft Informatiques",
+                    "email": "contact@espero-soft.com"
+                }
+            ],
+            "description": "Laravel command line interface (CLI)",
+            "keywords": [
+                "akpoli",
+                "entity",
+                "espero",
+                "espero-soft",
+                "laravel",
+                "laravel-maker",
+                "maker",
+                "migration",
+                "model",
+                "mudey"
+            ],
+            "support": {
+                "issues": "https://github.com/espero-soft/artisan/issues",
+                "source": "https://github.com/espero-soft/artisan/tree/main"
+            },
+            "time": "2023-12-28T10:03:01+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -8253,7 +8308,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "espero-soft/artisan": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
