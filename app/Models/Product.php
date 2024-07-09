@@ -12,7 +12,7 @@ class Product extends Model
     protected $fillable = [
         'name', 'slug', 'description', 'moreDescrciption', 'additionalInfos',
         'stock', 'soldePrice', 'regularPrice', 'imageUrls', 'brand',
-        'isAvailable', 'isBestSeller', 'isNewArrival', 'isFeatured', 'isSpecialOffer', 'categories'
+        'isAvailable', 'isBestSeller', 'isNewArrival', 'isFeatured', 'isSpecialOffer',
     ];
 
     protected $casts = [

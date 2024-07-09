@@ -31,6 +31,26 @@
             </div>
 
             <div class="mb-3">
+                <label for="categories" class="form-label">Categories</label>
+                <select class="form-control" name="categories[]" id="categories" multiple>
+                    <option disabled >Select product category</option>
+                    @foreach($categories as $category)
+                        <option  value="{{ $category->id }}"
+                            value="{{ $category->id }}"
+                            @if  (in_array($category->id, old('categories', isset($product) ? $product->categories->pluck('id')->toArray() : []))) selected @endif>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+                @error('categories')
+                        <div class="error text-danger">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
                 <label for="moreDescrciption" class="form-label">More Description</label>
                 <input type="text" placeholder="More Description ..." name="moreDescrciption" value="{{ old('moreDescrciption', isset($product) ? $product->moreDescrciption : '') }}" class="form-control" id="moreDescrciption" aria-describedby="moreDescrciptionHelp" required/>
                 @error('moreDescrciption')

@@ -43,7 +43,8 @@
         <div class="row gx-0 gy-0">
             <nav id="sidebar" class="col-md-2 border-end d-none d-md-block bg-light sidebar">
                 <div class="sidebar-sticky">
-                    <h2>Blog</h2>
+                    <a href="{{ route('home') }}"></a>
+                        <h2>Cheaper</h2>
                     <ul class="nav flex-column">
 
                     <li class="nav-item">

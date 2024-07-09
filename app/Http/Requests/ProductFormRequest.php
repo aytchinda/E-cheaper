@@ -39,7 +39,8 @@ class ProductFormRequest extends FormRequest
 			'isBestSeller' => 'required|boolean',
 			'isNewArrival' => 'required|boolean',
 			'isFeatured' => 'required|boolean',
-			'isSpecialOffer' => 'required|boolean'
+			'isSpecialOffer' => 'required|boolean',
+            'categories'=>$isRequired.'exists:categories,id'
 
         ];
     }

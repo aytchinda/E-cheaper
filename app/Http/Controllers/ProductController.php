@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\ProductFormRequest;
+use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class ProductController extends Controller
 {
@@ -20,22 +21,27 @@ class ProductController extends Controller
     public function show($id): View
     {
         $product = Product::findOrFail($id);
+        $categories = Category::all();
 
-        return view('products/show',['product' => $product]);
+        return view('products/show',['product' => $product,]);
     }
     public function create(): View
     {
-        return view('products/create');
+        $categories = Category::all();
+        return view('products/create',['categories'=> $categories]);
     }
 
     public function edit($id): View
     {
         $product = Product::findOrFail($id);
-        return view('products/edit', ['product' => $product]);
+        $categories = Category::all();
+
+        return view('products/edit', ['product' => $product,'categories'=> $categories]);
     }
 
     public function store(ProductFormRequest $req): RedirectResponse
     {
+        $categories = $req->validated('categories');
         $data = $req->validated();
 
             if ($req->hasFile('imageUrls')) {
@@ -43,11 +49,15 @@ class ProductController extends Controller
     }
 
         $product = Product::create($data);
+
+        $product->categories()->sync($categories);
+
         return redirect()->route('admin.product.show', ['id' => $product->id]);
     }
 
     public function update(Product $product, ProductFormRequest $req)
     {
+        $categories = $req->validated('categories');
         $data = $req->validated();
 
             if ($req->hasFile('imageUrls')) {
@@ -62,6 +72,7 @@ class ProductController extends Controller
     }
 
         $product->update($data);
+        $product->categories()->sync($categories);
 
         return redirect()->route('admin.product.show', ['id' => $product->id]);
     }
@@ -110,4 +121,7 @@ class ProductController extends Controller
             return 'images/' . $imageName;
         }
     }
+
+
+
 }

@@ -1,208 +1,232 @@
 @extends('admin')
 
 @section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endsection
 
 @section('content')
-<div >
-<h3> Products Details</h3>
+    <div>
+        <h3> Products Details</h3>
 
-<div class="d-flex justify-content-end">
-    <div class="dropdown m-1">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Column
-        </button>
-        <div id="columnSelector" class="dropdown-menu"> </div>
-    </div>
-    <a href="{{ route('admin.product.create') }}" class="btn btn-success m-1">
+        <div class="d-flex justify-content-end">
+            <div class="dropdown m-1">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Column
+                </button>
+                <div id="columnSelector" class="dropdown-menu"> </div>
+            </div>
+            <a href="{{ route('admin.product.create') }}" class="btn btn-success m-1">
+                Create Product
+            </a>
+        </div>
+        <div class="">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="Product" class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">N#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Slug</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">MoreDescrciption</th>
+                                <th scope="col">AdditionalInfos</th>
+                                <th scope="col">Stock</th>
+                                <th scope="col">SoldePrice</th>
+                                <th scope="col">RegularPrice</th>
+                                <th scope="col">ImageUrls</th>
+                                <th scope="col">Brand</th>
+                                <th scope="col">IsAvailable</th>
+                                <th scope="col">IsBestSeller</th>
+                                <th scope="col">IsNewArrival</th>
+                                <th scope="col">IsFeatured</th>
+                                <th scope="col">IsSpecialOffer</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($products as $product)
+                                <tr>
+                                    <td>{{ $product->id }}</td>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->slug }}</td>
+                                    <td>{{ $product->description }}</td>
+                                    <td>{{ $product->moreDescrciption }}</td>
+                                    <td>{!! $product->additionalInfos !!}</td>
+                                    <td>{{ $product->stock }}</td>
+                                    <td>{{ number_format($product->soldePrice, 2, ',', ' ') . ' €' }}</td>
+                                    <td>{{ number_format($product->regularPrice, 2, ',', ' ') . ' €' }}</td>
+                                    <td>
+                                        <div class="form-group d-flex" id="preview_imageUrl" style="max-width: 100%;">
+                                            @php
+                                                $imageUrls = is_array($product->imageUrls)
+                                                    ? $product->imageUrls
+                                                    : json_decode($product->imageUrls, true);
+                                            @endphp
+                                            @if (is_array($imageUrls) && !empty($imageUrls))
+                                                @foreach ($imageUrls as $url)
+                                                    <img src="{{ Str::startsWith($url, 'http') ? $url : Storage::url($url) }}"
+                                                        alt="Prévisualisation de l'image"
+                                                        style="max-width: 100px; display: block;" />
+                                                @endforeach
+                                            @else
+                                                <p>No images available</p>
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <td>{{ $product->brand }}</td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input name="isAvailable" id="isAvailable" data-id="{{ $product->id }}"
+                                                value="true" data-bs-toggle="toggle"
+                                                {{ isset($product) && $product->isAvailable == 'true' ? 'checked' : '' }}
+                                                class="form-check-input" type="checkbox" role="switch" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input name="isBestSeller" id="isBestSeller" data-id="{{ $product->id }}"
+                                                value="true" data-bs-toggle="toggle"
+                                                {{ isset($product) && $product->isBestSeller == 'true' ? 'checked' : '' }}
+                                                class="form-check-input" type="checkbox" role="switch" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input name="isNewArrival" id="isNewArrival" data-id="{{ $product->id }}"
+                                                value="true" data-bs-toggle="toggle"
+                                                {{ isset($product) && $product->isNewArrival == 'true' ? 'checked' : '' }}
+                                                class="form-check-input" type="checkbox" role="switch" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input name="isFeatured" id="isFeatured" data-id="{{ $product->id }}"
+                                                value="true" data-bs-toggle="toggle"
+                                                {{ isset($product) && $product->isFeatured == 'true' ? 'checked' : '' }}
+                                                class="form-check-input" type="checkbox" role="switch" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input name="isSpecialOffer" id="isSpecialOffer" data-id="{{ $product->id }}"
+                                                value="true" data-bs-toggle="toggle"
+                                                {{ isset($product) && $product->isSpecialOffer == 'true' ? 'checked' : '' }}
+                                                class="form-check-input" type="checkbox" role="switch" />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.product.show', ['id' => $product->id]) }}"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fa-solid fa-eye">Voir</i>
+                                        </a>
+                                        <a href="{{ route('admin.product.edit', ['id' => $product->id]) }}"
+                                            class="btn btn-success btn-sm">
+                                            <i class="fa-solid fa-pen-to-square">Edit</i>
+                                        </a>
+                                        <a href="#" data-id="{{ $product->id }}" class="btn btn-danger btn-sm deleteBtn">
+                                            <i class="fa-solid fa-trash">Supp</i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
-            Create Product
-
-    </a>
-</div>
-<div class="">
-    <div class="card-body">
-    <div class="table-responsive">
-        <table  id="Product" class="table">
-            <thead>
-                <tr>
-                    <th scope="col">N#</th>
-						<th scope="col">Name</th>
-						<th scope="col">Slug</th>
-						<th scope="col">Description</th>
-						<th scope="col">MoreDescrciption</th>
-						<th scope="col">AdditionalInfos</th>
-						<th scope="col">Stock</th>
-						<th scope="col">SoldePrice</th>
-						<th scope="col">RegularPrice</th>
-						<th scope="col">ImageUrls</th>
-						<th scope="col">Brand</th>
-						<th scope="col">IsAvailable</th>
-						<th scope="col">IsBestSeller</th>
-						<th scope="col">IsNewArrival</th>
-						<th scope="col">IsFeatured</th>
-						<th scope="col">IsSpecialOffer</th>
-
-						<th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($products as $product)
-						<tr><td>{{ $product->id }}</td>
-							<td>{{ $product->name }}</td>
-							<td>{{ $product->slug }}</td>
-							<td>{{ $product->description }}</td>
-							<td>{{ $product->moreDescrciption }}</td>
-							<td>{!! $product->additionalInfos !!}</td>
-							<td>{{ $product->stock }}</td>
-							<td>{{ number_format($product->soldePrice, 2, ',', ' ') . ' €' }}</td>
-							<td>{{ number_format($product->regularPrice, 2, ',', ' ') . ' €' }}</td>
-							    <td>
-                                    <div class="form-group d-flex" id="preview_imageUrl" style="max-width: 100%;">
-                                        @php
-                                            $imageUrls = is_array($product->imageUrls) ? $product->imageUrls : json_decode($product->imageUrls, true);
-                                        @endphp
-                                        @if (is_array($imageUrls) && !empty($imageUrls))
-                                            @foreach ($imageUrls as $url)
-                                                <img src="{{ Str::startsWith($url, 'http') ? $url : Storage::url($url) }}" alt="Prévisualisation de l'image" style="max-width: 100px; display: block;" />
-                                            @endforeach
-                                        @else
-                                            <p>No images available</p>
-                                        @endif
-                                    </div>
-</td>
-							<td>{{ $product->brand }}</td>
-							    <td>
-    <div class="form-check form-switch">
-        <input name="isAvailable" id="isAvailable" data-id="{{$product->id}}" value="true" data-bs-toggle="toggle"  {{ isset($product) && $product->isAvailable == 'true' ? 'checked' : '' }} class="form-check-input" type="checkbox" role="switch" />
-    </div>
-</td>
-							    <td>
-    <div class="form-check form-switch">
-        <input name="isBestSeller" id="isBestSeller" data-id="{{$product->id}}" value="true" data-bs-toggle="toggle"  {{ isset($product) && $product->isBestSeller == 'true' ? 'checked' : '' }} class="form-check-input" type="checkbox" role="switch" />
-    </div>
-</td>
-							    <td>
-    <div class="form-check form-switch">
-        <input name="isNewArrival" id="isNewArrival" data-id="{{$product->id}}" value="true" data-bs-toggle="toggle"  {{ isset($product) && $product->isNewArrival == 'true' ? 'checked' : '' }} class="form-check-input" type="checkbox" role="switch" />
-    </div>
-</td>
-							    <td>
-    <div class="form-check form-switch">
-        <input name="isFeatured" id="isFeatured" data-id="{{$product->id}}" value="true" data-bs-toggle="toggle"  {{ isset($product) && $product->isFeatured == 'true' ? 'checked' : '' }} class="form-check-input" type="checkbox" role="switch" />
-    </div>
-</td>
-							    <td>
-    <div class="form-check form-switch">
-        <input name="isSpecialOffer" id="isSpecialOffer" data-id="{{$product->id}}" value="true" data-bs-toggle="toggle"  {{ isset($product) && $product->isSpecialOffer == 'true' ? 'checked' : '' }} class="form-check-input" type="checkbox" role="switch" />
-    </div>
-</td>
-						<td>
-                    <a href="{{ route('admin.product.show', ['id' => $product->id]) }}" class="btn btn-primary btn-sm">
-                        <i class="fa-solid fa-eye"></i>
-                    </a>
-                    <a href="{{ route('admin.product.edit', ['id' => $product->id]) }}" class="btn btn-success btn-sm">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <a href="#" data-id="{{ $product->id }}" class="btn btn-danger btn-sm deleteBtn">
-                        <i class="fa-solid fa-trash"></i>
-                    </a>
-                </td>
-						</tr>
-					@endforeach
-            </tbody>
-        </table>
-    </div>
-
-        <!-- Pagination -->
-        <div class="d-flex justify-content-center">
-            {{ $products->links('pagination::bootstrap-5') }}
+                <!-- Pagination -->
+                <div class="d-flex justify-content-center">
+                    {{ $products->links('pagination::bootstrap-5') }}
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</div>
-
 
     <!-- Modal -->
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h3 class="modal-title fs-5" id="confirmModalLabel">Delete confirm</h3>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="confirmModalLabel">Delete confirm</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary confirmDeleteAction">Delete</button>
+                </div>
             </div>
-            <div class="modal-body">
-            ...
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary confirmDeleteAction">Delete</button>
-            </div>
-        </div>
         </div>
     </div>
 @endsection
-@section('scripts')
 
+@section('scripts')
     <script>
         const checkboxs = document.querySelectorAll('input[type="checkbox"]')
 
         checkboxs.forEach((checkbox) => {
+            checkbox.onchange = async (event) => {
+                const { checked, name, dataset } = event.target;
+                const { id } = dataset;
+                console.log({ checked, name, id });
+                const data = { [name]: checked.toString() };
+                const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+                const response = await fetch('/admin/products/speed/' + id, {
+                    method: 'PUT',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    }
+                });
+            };
+        });
 
-        checkbox.onchange = async (event) => {
-            const { checked, name, dataset } = event.target;
-            const { id } = dataset;
-            console.log({ checked, name, id });
-            const data = { [name]: checked.toString() };
-            const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-            const response = await fetch('/admin/products/speed/' + id, {
-                method: 'PUT',
-                body: JSON.stringify(data), // Utilisation de JSON.stringify au lieu de JSON.stringfy
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                }
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.deleteBtn');
+            let productIdToDelete = null;
+
+            deleteButtons.forEach(deleteButton => {
+                deleteButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    productIdToDelete = deleteButton.dataset.id;
+                    const modalBody = document.querySelector('.modal-body');
+                    modalBody.innerHTML = `Are you sure you want to delete this data?`;
+                    const modal = new bootstrap.Modal(document.querySelector('#confirmModal'));
+                    modal.show();
+                });
             });
-        };
-        })
 
-        const deleteButtons = document.querySelectorAll('.deleteBtn')
-        deleteButtons.forEach(deleteButton => {
-            deleteButton.addEventListener('click', (event)=>{
-                event.preventDefault();
-                const { id , title } = deleteButton.dataset
-                const modalBody = document.querySelector('.modal-body')
-                modalBody.innerHTML = `Are you sure you want to delete this data ?</strong> `
-                console.log({ id , title });
-                const modal = new bootstrap.Modal(document.querySelector('#confirmModal'))
-                modal.show()
-                const confirmDeleteBtn = document.querySelector('.confirmDeleteAction')
-
-                confirmDeleteBtn.addEventListener('click',async ()=>{
+            const confirmDeleteBtn = document.querySelector('.confirmDeleteAction');
+            confirmDeleteBtn.addEventListener('click', async () => {
+                if (productIdToDelete) {
                     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-                    const response = await fetch('/admin/products/delete/'+id , {
+                    const response = await fetch('/admin/products/delete/' + productIdToDelete, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
                             'X-CSRF-TOKEN': csrfToken
                         }
-                    })
+                    });
 
-                    const result = await response.json()
+                    const result = await response.json();
 
-                    if(result && result.isSuccess){
-                        window.location.href = window.location.href;
+                    if (result && result.isSuccess) {
+                        window.location.reload(); // Reload the page to reflect the changes
+                    } else {
+                        console.error('Failed to delete the product.');
                     }
 
+                    const modal = bootstrap.Modal.getInstance(document.querySelector('#confirmModal'));
+                    modal.hide();
+                }
+            });
 
-                    modal.hide()
-                })
-            })
-
-        });
-        document.addEventListener('DOMContentLoaded', function() {
             const tableHeaders = document.querySelectorAll('#Product th');
             const columnSelector = document.getElementById('columnSelector');
 
@@ -215,7 +239,7 @@
                 const label = document.createElement('label');
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
-                checkbox.role="switch"
+                checkbox.role = "switch"
                 checkbox.className = 'columnSelector form-check-input';
                 checkbox.dataset.column = index;
                 const savedSelection = localStorage.getItem('selectedColumns#Product');
@@ -243,9 +267,7 @@
                 }
             });
 
-
             const checkboxes = document.querySelectorAll('.columnSelector');
-
             checkboxes.forEach(function(checkbox) {
                 checkbox.addEventListener('change', function() {
                     const columnIndex = parseInt(checkbox.dataset.column);
@@ -299,13 +321,16 @@
             const table = document.getElementById('Product');
             const rows = Array.from(table.querySelectorAll('tbody tr'));
 
-            console.log({rows});
+            console.log({ rows });
 
             rows.sort((a, b) => {
                 const cellA = a.querySelectorAll('td')[columnIndex].textContent;
                 const cellB = b.querySelectorAll('td')[columnIndex].textContent;
 
-                return cellA.localeCompare(cellB, undefined, { numeric: true, sensitivity: 'base' });
+                return cellA.localeCompare(cellB, undefined, {
+                    numeric: true,
+                    sensitivity: 'base'
+                });
             });
 
             table.querySelector('tbody').innerHTML = '';
