@@ -12,8 +12,10 @@
         <div class="container">
             <div class="header-top">
                 <div class="logo">
+
                     <a href="/">
-                        <img src="path/to/your/logo.png" alt="Cheaper Logo">
+                        <h1>Cheaper</h1>
+                        <img src="path/to/your/logo.png" alt=" Logo">
                     </a>
                 </div>
                 <div class="search-bar">
