@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <div class="container">
+        <div class="container-fluid">
             <div class="header-top">
                 <div class="logo">
 

@@ -1,5 +1,5 @@
 <footer>
-    <div class="container">
+    <div class="container-fluid">
         <div class="footer-top">
             <div class="footer-section">
                 <h4>About Cheaper</h4>
