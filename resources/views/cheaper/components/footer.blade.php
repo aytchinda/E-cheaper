@@ -64,7 +64,7 @@
     }
 
     footer {
-        background-color: #f8f8f8;
+        background-color: #ebe2e2;
         border-top: 1px solid #e7e7e7;
     }
 

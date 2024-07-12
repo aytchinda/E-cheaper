@@ -6,16 +6,139 @@
     <title>Cheaper - Your Online Store</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="path/to/your/css/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: white;
+            border-bottom: 1px solid #e7e7e7;
+        }
+
+        .container-fluid {
+            width: 100%;
+            padding: 0 20px;
+            margin: 0 auto;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            max-height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-family: 'Arial', sans-serif; /* Utilize Arial or a similar sans-serif font */
+            color: black;
+            margin: 0;
+            letter-spacing: 2px; /* Add letter spacing */
+            text-transform: uppercase; /* Make text uppercase */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .logo a {
+            text-decoration: none; /* Remove underline from the link */
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            max-width: 600px;
+            margin: 0 20px;
+        }
+
+        .search-bar form {
+            display: flex;
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-right: none;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            background-color: black;
+            border: 1px solid black;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-actions a {
+            margin-left: 15px;
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-actions a span {
+            margin-left: 5px;
+        }
+
+        .main-navigation {
+            background-color: white;
+            border-top: 1px solid #e7e7e7;
+            padding: 10px 0;
+        }
+
+        .main-navigation ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-navigation ul li {
+            margin: 0 10px;
+        }
+
+        .main-navigation ul li a {
+            color: black;
+            text-decoration: none;
+            display: block;
+            padding: 5px 10px;
+        }
+
+        .main-navigation ul li a:hover {
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="container-fluid">
             <div class="header-top">
                 <div class="logo">
-
                     <a href="/">
+                        <img src="path/to/your/logo.png" alt="Logo">
                         <h1>Cheaper</h1>
-                        <img src="path/to/your/logo.png" alt=" Logo">
                     </a>
                 </div>
                 <div class="search-bar">
@@ -50,102 +173,5 @@
             </nav>
         </div>
     </header>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        header {
-            background-color: #f8f8f8;
-            border-bottom: 1px solid #e7e7e7;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-        }
-
-        .logo img {
-            max-height: 50px;
-        }
-
-        .search-bar {
-            flex-grow: 1;
-            max-width: 600px;
-            margin: 0 20px;
-        }
-
-        .search-bar form {
-            display: flex;
-        }
-
-        .search-bar input {
-            flex-grow: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-right: none;
-            border-radius: 5px 0 0 5px;
-        }
-
-        .search-bar button {
-            padding: 10px;
-            background-color: #007bff;
-            border: 1px solid #007bff;
-            color: white;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-        }
-
-        .user-actions a {
-            margin-left: 15px;
-            color: #333;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .user-actions a span {
-            margin-left: 5px;
-        }
-
-        .main-navigation {
-            background-color: #007bff;
-        }
-
-        .main-navigation ul {
-            list-style: none;
-            display: flex;
-            justify-content: space-around;
-            margin: 0;
-            padding: 0;
-        }
-
-        .main-navigation ul li {
-            margin: 0;
-        }
-
-        .main-navigation ul li a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            padding: 15px 20px;
-        }
-
-        .main-navigation ul li a:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </body>
 </html>

@@ -8,7 +8,8 @@
     <style>
         .carousel-item {
             max-height: 400px; /* Ajustez cette valeur selon vos besoins */
-            background-size: cover;
+            background-size: contain; /* Use 'cover' to fill the area while maintaining aspect ratio */
+            background-repeat: repeat;
             background-position: center;
         }
         .carousel-item .banner_slide_content {
@@ -28,12 +29,12 @@
     </style>
 </head>
 <body>
-    <div class="container-fluid mt-3">
+    <div class="container-fluid">
         <div class="banner_section slide_medium shop_banner_slider staggered-animation-wrap">
-            <div id="carouselExampleControls" class="carousel slide carousel-fade light_arrow" data-bs-ride="carousel" data-bs-interval="1000">
+            <div id="carouselExampleControls" class="carousel slide carousel light_arrow" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-inner">
                     @foreach($banners as $banner)
-                        <div class="carousel-item {{ $loop->first ? 'active' : '' }} background_bg"
+                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}"
                              style="background-image: url('{{ Storage::url($banner->imageUrl) }}');">
                             <div class="banner_slide_content">
                                 <h5>{{ $banner->title }}</h5>

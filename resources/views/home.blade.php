@@ -1,36 +1,25 @@
 @extends('base')
 
 @section('content')
+    @include('cheaper/components/banner')
 
-@include('cheaper/components/banner')
+    <div class="container-fluid">
+        @include('cheaper/components/collection')
 
-<div class="container-fluid" >
-    <div >
-        <table class="table ">
-            <tbody>
-                @foreach($products->chunk(3) as $chunk)
-                    <tr>
-                        @foreach($chunk as $product)
-                            @php
-                                // Supprimer les guillemets autour de l'URL de l'image
-                                $imageUrl = trim($product->imageUrls, '["]');
-                            @endphp
-                            <td class="col-md-3">
-                                <div class="card mb-4">
-                                    <img src="{{ asset('storage/' . $imageUrl) }}" class="card-img-top" alt="{{ $product->name }}" width="400" height="300">
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ $product->name }}</h5>
-                                        <p class="card-text">{{ $product->description }}</p>
-                                        <p class="card-text"><strong>Prix :</strong> ${{ $product->regularPrice }}</p>
-                                    </div>
-                                </div>
-                            </td>
-                        @endforeach
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
+        <div class="section-title">
+            <h2><strong>Exclusive Products</strong></h2>
+        </div>
+        <div class="exclusive-products">
+            <ul class="exclusive-products-menu">
+                <li><a href="#" class="category-link active" data-category="newArrivals">New Arrival</a></li>
+                <li><a href="#" class="category-link" data-category="bestSellers">Best Sellers</a></li>
+                <li><a href="#" class="category-link" data-category="featured">Featured</a></li>
+                <li><a href="#" class="category-link" data-category="specialOffers">Special Offer</a></li>
+            </ul>
+        </div>
+
+        @include('cheaper/components/product_type')
+
+
 
 @endsection

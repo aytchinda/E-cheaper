@@ -67,6 +67,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     //Show Product by Id
     Route::get('/products/show/{id}', 'App\Http\Controllers\ProductController@show')->name('product.show');
+    
 
     //Get Products by Id
     Route::get('/products/create', 'App\Http\Controllers\ProductController@create')->name('product.create');
@@ -140,5 +141,32 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     //Delete Banner
     Route::delete('/banners/delete/{banner}', 'App\Http\Controllers\BannerController@delete')->name('banner.delete');
+
+});
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    //Get Shopcollections datas
+    Route::get('/shopcollections', 'App\Http\Controllers\ShopcollectionController@index')->name('shopcollection.index');
+
+    //Show Shopcollection by Id
+    Route::get('/shopcollections/show/{id}', 'App\Http\Controllers\ShopcollectionController@show')->name('shopcollection.show');
+
+    //Get Shopcollections by Id
+    Route::get('/shopcollections/create', 'App\Http\Controllers\ShopcollectionController@create')->name('shopcollection.create');
+
+    //Edit Shopcollection by Id
+    Route::get('/shopcollections/edit/{id}', 'App\Http\Controllers\ShopcollectionController@edit')->name('shopcollection.edit');
+
+    //Save new Shopcollection
+    Route::post('/shopcollections/store', 'App\Http\Controllers\ShopcollectionController@store')->name('shopcollection.store');
+
+    //Update One Shopcollection
+    Route::put('/shopcollections/update/{shopcollection}', 'App\Http\Controllers\ShopcollectionController@update')->name('shopcollection.update');
+
+    //Update One Shopcollection Speedly
+    Route::put('/shopcollections/speed/{shopcollection}', 'App\Http\Controllers\ShopcollectionController@updateSpeed')->name('shopcollection.update.speed');
+
+    //Delete Shopcollection
+    Route::delete('/shopcollections/delete/{shopcollection}', 'App\Http\Controllers\ShopcollectionController@delete')->name('shopcollection.delete');
 
 });
