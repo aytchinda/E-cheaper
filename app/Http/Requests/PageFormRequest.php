@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryFormRequest extends FormRequest
+class PageFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,19 +23,22 @@ class CategoryFormRequest extends FormRequest
     {
         $isRequired = request()->isMethod("POST") ?"required|": "";
         return [
-            'name' => $isRequired.'string',
-            'slug' => $isRequired.'string',
-            'description' => $isRequired.'string',
-            'imageUrl' => $isRequired.'image|mimes:webp,jpeg,png,jpg,gif|max:2048',
-            'isMega' => 'nullable|boolean',  // Modifier en nullable ici
+            //
+            'title' => $isRequired.'string',
+			'slug' => $isRequired.'',
+			'content' => $isRequired.'string',
+			'isHead' => $isRequired.'in:true,false|nullable',
+			'isFoot' => $isRequired.'in:true,false|nullable'
+			
         ];
     }
-
-    protected function prepareForValidation()
+    public function prepareForValidation()
     {
         $this->merge([
-            'slug' => \Illuminate\Support\Str::slug($this->input('name')),
-            'isMega' => $this->boolean('isMega'),  // Modification ici
+            'slug' => \Illuminate\Support\Str::slug($this->input('title')),
+			'isHead' => $this->input('isHead') ? 'true' : 'false',
+			'isFoot' => $this->input('isFoot') ? 'true' : 'false',
+			
         ]);
     }
 }

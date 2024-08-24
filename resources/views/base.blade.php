@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> @yield('title', 'Cheaper | E-commerce')</title>
     @yield('styles')
+
 </head>
 <body>
-
-
     @include('cheaper/components/header')
     @yield('content')
     @include('cheaper/components/footer')

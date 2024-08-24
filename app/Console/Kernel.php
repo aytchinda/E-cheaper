@@ -5,6 +5,7 @@ namespace App\Console;
 
 use EsperoSoft\Artisan\Console\Commands\MakeCrudCommand;
 use EsperoSoft\Artisan\Console\Commands\MakeEntityCommand;
+use EsperoSoft\Artisan\Console\Commands\MakeServiceCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -30,6 +31,7 @@ class Kernel extends ConsoleKernel
         $this->getArtisan()->add( new MakeEntityCommand() );
         #enregistrer les commandes makecrud
         $this->getArtisan()->add( new MakeCrudCommand() );
+        $this->getArtisan()->add( new MakeServiceCommand() );
 
         require base_path('routes/console.php');
     }

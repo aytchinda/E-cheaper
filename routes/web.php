@@ -3,7 +3,13 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CompareController;
+use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -18,7 +24,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[HomeController::class,'index' ] )->name ('home');
+Route::get('/',[HomeController::class,'index' ] )->name ('home')->middleware('preload.page');
+Route::get('/page/{page:slug}',[HomeController::class,'showPage' ] )->name ('page')->middleware('preload.page');
+
+//Routes produits
+Route::get('/shop',[HomeController::class,'shop' ] )->name ('shop')->middleware('preload.page');
+
+//RoUTES SHOP
+Route::get('/product/{slug}',[HomeController::class,'showProduct' ] )->name ('product')->middleware('preload.page');
+
+ // Routes CArd
+
+ Route::get('/cart', [cartController::class, 'index'])->name('cart.index')->middleware('preload.page');
+ Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('addToCart')->middleware('preload.page');
+ Route::delete('/cart/remove/{productId}/{quantity}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
+
+ Route::post('/cart/increment/{productId}', [CartController::class, 'incrementQuantity'])->name('cart.increment');
+Route::post('/cart/decrement/{productId}', [CartController::class, 'decrementQuantity'])->name('cart.decrement');
+
+//Comparaison produits
+Route::get('/compare', [CompareController::class, 'compare'])->name('compare');
+Route::post('/compare/add/{productId}', [CompareController::class, 'addToCompare'])->name('addToCompare')->middleware('preload.page');
+Route::post('/compare/remove/{productId}', [CompareController::class, 'removeFromCompare'])->name('removeFromCompare')->middleware('preload.page');
+Route::post('/compare/clear', [CompareController::class, 'clearCompare'])->name('clearCompare')->middleware('preload.page');
+
+Route::post('/compare/submit', [CompareController::class, 'submitComparison'])->name('submitComparison')->middleware('preload.page');
+
+
+
 
 
 Route::get('/dashboard', function () {
@@ -67,7 +100,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     //Show Product by Id
     Route::get('/products/show/{id}', 'App\Http\Controllers\ProductController@show')->name('product.show');
-    
+
 
     //Get Products by Id
     Route::get('/products/create', 'App\Http\Controllers\ProductController@create')->name('product.create');
@@ -168,5 +201,33 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     //Delete Shopcollection
     Route::delete('/shopcollections/delete/{shopcollection}', 'App\Http\Controllers\ShopcollectionController@delete')->name('shopcollection.delete');
+
+});
+
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    //Get Pages datas
+    Route::get('/pages', 'App\Http\Controllers\PageController@index')->name('page.index');
+
+    //Show Page by Id
+    Route::get('/pages/show/{id}', 'App\Http\Controllers\PageController@show')->name('page.show');
+
+    //Get Pages by Id
+    Route::get('/pages/create', 'App\Http\Controllers\PageController@create')->name('page.create');
+
+    //Edit Page by Id
+    Route::get('/pages/edit/{id}', 'App\Http\Controllers\PageController@edit')->name('page.edit');
+
+    //Save new Page
+    Route::post('/pages/store', 'App\Http\Controllers\PageController@store')->name('page.store');
+
+    //Update One Page
+    Route::put('/pages/update/{page}', 'App\Http\Controllers\PageController@update')->name('page.update');
+
+    //Update One Page Speedly
+    Route::put('/pages/speed/{page}', 'App\Http\Controllers\PageController@updateSpeed')->name('page.update.speed');
+
+    //Delete Page
+    Route::delete('/pages/delete/{page}', 'App\Http\Controllers\PageController@delete')->name('page.delete');
 
 });

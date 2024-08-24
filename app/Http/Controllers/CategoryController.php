@@ -20,9 +20,9 @@ class CategoryController extends Controller
     public function show($id): View
     {
         $category = Category::findOrFail($id);
-
         return view('categories/show',['category' => $category]);
     }
+
     public function create(): View
     {
         return view('categories/create');
@@ -38,9 +38,9 @@ class CategoryController extends Controller
     {
         $data = $req->validated();
 
-            if ($req->hasFile('imageUrl')) {
-        $data['imageUrl'] = $this->handleImageUpload($req->file('imageUrl'));
-    }
+        if ($req->hasFile('imageUrl')) {
+            $data['imageUrl'] = $this->handleImageUpload($req->file('imageUrl'));
+        }
 
         $category = Category::create($data);
         return redirect()->route('admin.category.show', ['id' => $category->id]);
@@ -50,13 +50,18 @@ class CategoryController extends Controller
     {
         $data = $req->validated();
 
-            if ($req->hasFile('imageUrl')) {
-        // Suppression de l'ancienne image si elle existe
-        if ($category->imageUrl) {
-            Storage::disk('public')->delete($category->imageUrl);
+        if ($req->hasFile('imageUrl')) {
+            // Suppression de l'ancienne image si elle existe
+            if ($category->imageUrl) {
+                Storage::disk('public')->delete($category->imageUrl);
+            }
+            $data['imageUrl'] = $this->handleImageUpload($req->file('imageUrl'));
         }
-        $data['imageUrl'] = $this->handleImageUpload($req->file('imageUrl'));
-    }
+
+        // Gestion du booléen isMega
+        if (!isset($data['isMega'])) {
+            $data['isMega'] = false; // Si isMega n'est pas coché
+        }
 
         $category->update($data);
 
@@ -75,13 +80,30 @@ class CategoryController extends Controller
             'isSuccess' => true,
             'data' => $req->all()
         ];
+         // Gestion du booléen isMega
+    if (!isset($data['isMega'])) {
+        $data['isMega'] = false; // Si isMega n'est pas coché
+    } else {
+        $data['isMega'] = filter_var($data['isMega'], FILTER_VALIDATE_BOOLEAN); // Convertir en booléen
+    }
+
+    foreach ($data as $key => $value) {
+        $category->update([
+            $key => $value
+        ]);
+    }
+
+    return [
+        'isSuccess' => true,
+        'data' => $data
+    ];
     }
 
     public function delete(Category $category)
     {
-            if ($category->imageUrl) {
-        Storage::disk('public')->delete($category->imageUrl);
-    }
+        if ($category->imageUrl) {
+            Storage::disk('public')->delete($category->imageUrl);
+        }
         $category->delete();
 
         return [
@@ -89,7 +111,7 @@ class CategoryController extends Controller
         ];
     }
 
-        private function handleImageUpload(\Illuminate\Http\UploadedFile|array $images): string|array
+    private function handleImageUpload(\Illuminate\Http\UploadedFile|array $images): string|array
     {
         if (is_array($images)) {
             $uploadedImages = [];

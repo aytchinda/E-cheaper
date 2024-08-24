@@ -39,7 +39,7 @@
                             <div class="banner_slide_content">
                                 <h5>{{ $banner->title }}</h5>
                                 <p class="fw-bold fst-italic">{{ $banner->description }}</p>
-                                <a href="{{ $banner->buttonLink }}" class="btn btn-primary">{{ $banner->buttonText }}</a>
+                                <a href="{{ route('shop') }}" class="btn btn-primary">{{ $banner->buttonText }}</a>
                             </div>
                         </div>
                     @endforeach

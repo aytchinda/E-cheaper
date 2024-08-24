@@ -67,6 +67,10 @@
     <a class="nav-link" href="{{route('admin.shopcollection.index')}}">
         Shopcollections
     </a>
+</li><li class="nav-item">
+    <a class="nav-link" href="{{route('admin.page.index')}}">
+        Pages
+    </a>
 </li></ul>
                 </div>
             </nav>

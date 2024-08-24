@@ -15,7 +15,8 @@
         }
 
         header {
-            background-color: white;
+            background-color: #000;
+            color: #fff;
             border-bottom: 1px solid #e7e7e7;
         }
 
@@ -44,16 +45,15 @@
 
         .logo h1 {
             font-size: 24px;
-            font-family: 'Arial', sans-serif; /* Utilize Arial or a similar sans-serif font */
-            color: black;
+            color: white;
             margin: 0;
-            letter-spacing: 2px; /* Add letter spacing */
-            text-transform: uppercase; /* Make text uppercase */
-            text-decoration: none; /* Remove underline */
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .logo a {
-            text-decoration: none; /* Remove underline from the link */
+            text-decoration: none;
+            color: white;
         }
 
         .search-bar {
@@ -76,9 +76,9 @@
 
         .search-bar button {
             padding: 10px;
-            background-color: black;
-            border: 1px solid black;
-            color: white;
+            background-color: #fff;
+            border: 1px solid #fff;
+            color: black;
             border-radius: 0 5px 5px 0;
             cursor: pointer;
         }
@@ -90,7 +90,7 @@
 
         .user-actions a {
             margin-left: 15px;
-            color: #333;
+            color: #fff;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -101,7 +101,7 @@
         }
 
         .main-navigation {
-            background-color: white;
+            background-color: #000;
             border-top: 1px solid #e7e7e7;
             padding: 10px 0;
         }
@@ -116,10 +116,11 @@
 
         .main-navigation ul li {
             margin: 0 10px;
+            position: relative;
         }
 
         .main-navigation ul li a {
-            color: black;
+            color: white;
             text-decoration: none;
             display: block;
             padding: 5px 10px;
@@ -128,6 +129,33 @@
         .main-navigation ul li a:hover {
             background-color: #f8f8f8;
             border-radius: 5px;
+            color: black;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #000;
+            top: 100%;
+            left: 0;
+            min-width: 160px;
+            z-index: 1;
+            border: 1px solid #e7e7e7;
+        }
+
+        .main-navigation ul li:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #575757;
         }
     </style>
 </head>
@@ -158,7 +186,7 @@
                     </a>
                     <a href="/cart" class="cart-icon">
                         <i class="fa fa-shopping-cart"></i>
-                        <span>Cart (<span class="cart-count">0</span>)</span>
+                        <span>Cart (<span class="cart-count">{{ $cartCount ?? 0 }}</span>)</span>
                     </a>
                 </div>
             </div>
@@ -166,9 +194,14 @@
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/shop">Shop</a></li>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                    <li><a href="/faq">FAQ</a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)">Pages <i class="fa fa-caret-down"></i></a>
+                        <div class="dropdown-menu">
+                            @foreach (session()->get('pages')['headPages'] as $page)
+                                <a href="{{ route('page', ['page' => $page->slug]) }}">{{ $page->title }}</a>
+                            @endforeach
+                        </div>
+                    </li>
                 </ul>
             </nav>
         </div>

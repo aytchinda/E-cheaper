@@ -1,18 +1,22 @@
 @section('styles')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
 @endsection
 
 <div class="row">
     <div class="col-md-8">
-        <form action="{{ isset($category) ? route('admin.category.update', ['category' => $category->id]) : route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
+        <form
+            action="{{ isset($category) ? route('admin.category.update', ['category' => $category->id]) : route('admin.category.store') }}"
+            method="POST" enctype="multipart/form-data">
             @csrf
-            @if(isset($category))
+            @if (isset($category))
                 @method('PUT')
             @endif
 
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" placeholder="Name ..." name="name" value="{{ old('name', isset($category) ? $category->name : '') }}" class="form-control" id="name" aria-describedby="nameHelp" required />
+                <input type="text" placeholder="Name ..." name="name"
+                    value="{{ old('name', isset($category) ? $category->name : '') }}" class="form-control"
+                    id="name" aria-describedby="nameHelp" required />
                 @error('name')
                     <div class="error text-danger">
                         {{ $message }}
@@ -22,7 +26,9 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <input type="text" placeholder="Description ..." name="description" value="{{ old('description', isset($category) ? $category->description : '') }}" class="form-control" id="description" aria-describedby="descriptionHelp" required />
+                <input type="text" placeholder="Description ..." name="description"
+                    value="{{ old('description', isset($category) ? $category->description : '') }}"
+                    class="form-control" id="description" aria-describedby="descriptionHelp" required />
                 @error('description')
                     <div class="error text-danger">
                         {{ $message }}
@@ -34,7 +40,9 @@
                 <button type="button" class="btn btn-success btn-file my-1" onclick="triggerFileInput('imageUrl')">
                     Add file: (ImageUrl)
                 </button>
-                <input type="file" name="imageUrl" value="{{ old('imageUrl', isset($category) ? $category->imageUrl : '') }}" class="visually-hidden form-control imageUpload" id="imageUrl" aria-describedby="imageUrlHelp" />
+                <input type="file" name="imageUrl"
+                    value="{{ old('imageUrl', isset($category) ? $category->imageUrl : '') }}"
+                    class="visually-hidden form-control imageUpload" id="imageUrl" aria-describedby="imageUrlHelp" />
                 <div class="form-group d-flex" id="preview_imageUrl" style="max-width: 100%;"></div>
                 @error('imageUrl')
                     <div class="error text-danger">
@@ -54,7 +62,7 @@
                     <option value="false" {{ old('isMega', isset($category) && $category->isMega == 'false' ? 'selected' : '') }}>No</option>
                 </select>
                 --}}
-                {{-- @error('isMega')
+            {{-- @error('isMega')
                     <div class="error text-danger">
                         {{ $message }}
                     </div>
@@ -64,20 +72,17 @@
             <div class="mb-3 d-flex gap-2">
                 <label for="isMega" class="form-label">Is Mega</label>
                 <div class="form-check form-switch">
+                    <input type="hidden" name="isMega" value="0">
                     <input name="isMega" id="isMega" value="1" {{ old('isMega', isset($category) && $category->isMega ? 'checked' : '') }} class="form-check-input" type="checkbox" role="switch" />
                 </div>
-                    {{--
-                <select class="form-control" name="isMega" id="isMega">
-                    <option value="true" {{ old('isMega', isset($category) && $category->isMega == 'true' ? 'selected' : '') }}>Yes</option>
-                    <option value="false" {{ old('isMega', isset($category) && $category->isMega == 'false' ? 'selected' : '') }}>No</option>
-                </select>
-                --}}
                 @error('isMega')
                     <div class="error text-danger">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
+
+
 
             <a href="{{ route('admin.category.index') }}" class="btn btn-danger mt-1">
                 Cancel
@@ -99,9 +104,9 @@
 </div>
 
 @section('scripts')
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script> --}}
 
     <script>
         const textareas = document.querySelectorAll('textarea');
@@ -149,13 +154,33 @@
 
                             reader.readAsDataURL(file);
                             previewContainer.appendChild(img);
-                            console.log({ img })
-                            console.log({ previewContainer })
+                            console.log({
+                                img
+                            })
+                            console.log({
+                                previewContainer
+                            })
                         }
                     }
-                    console.log({ previewContainer })
+                    console.log({
+                        previewContainer
+                    })
                 }
             });
         });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+        const checkbox = document.getElementById('isMega');
+        const hiddenInput = document.querySelector('input[type="hidden"][name="isMega"]');
+
+        checkbox.addEventListener('change', function() {
+            if (checkbox.checked) {
+                hiddenInput.value = '1';
+            } else {
+                hiddenInput.value = '0';
+            }
+        });
+    });
     </script>
 @endsection

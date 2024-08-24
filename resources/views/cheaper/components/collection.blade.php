@@ -1,15 +1,15 @@
-<div class="container d-flex flex-wrap justify-content-between mb-2 mt-1" style="max-width: 70%;">
-    <div class="row w-100">
+<div class="container d-flex flex-wrap justify-content-between mb-2 mt-1" style="max-width: 70%; padding: 0;">
+    <div class="row w-100" style="margin: 0;">
         @foreach ($collections as $collection)
             <div class="col-md-6 mb-2">
                 <div class="card h-100">
                     <div class="card-body">
                         <img src="{{ asset('storage/' . $collection->imageUrl) }}" class="card-img-top"
                             alt="{{ $collection->title }}">
-                        <h5 class="card-title" style="line-height: 1.0; font-size: 1.1rem; margin-bottom: 5px;">{{ $collection->title }}</h5>
-                        <p class="card-text" style="font-size: 18px; font-weight: bold; line-height: 1.0; margin-bottom: 5px;">
+                        <h5 class="card-title" style="line-height: 1.0; font-size: 1.1rem; margin-bottom: 5px; color: #fff;">{{ $collection->title }}</h5>
+                        <p class="card-text" style="font-size: 18px; font-weight: bold; line-height: 1.0; margin-bottom: 5px; color: #fff;">
                             {{ $collection->description }}</p>
-                        <a class="single_btn_link" href="http://127.0.0.1:8000/"
+                        <a class="single_btn_link" href="{{ route('shop') }}"
                             style="background-color: #4CAF50; color: white; padding: 5px 10px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; border-radius: 5px; margin-top: 5px;">{{ $collection->buttonText }}</a>
                     </div>
                 </div>
@@ -21,22 +21,36 @@
 <style>
     .container {
         max-width: 70%;
+        padding: 0;
         margin: auto;
+    }
+
+    .row {
+        margin: 0;
+        width: 100%;
+    }
+
+    .card {
+        background-color: #000; /* Couleur de fond noire pour la carte */
+        border: none; /* Enlever les bordures de la carte */
     }
 
     .card-title {
         line-height: 1.0; /* Réduire l'interligne */
         font-size: 1.1rem; /* Réduire la taille de la police du titre */
         margin-bottom: 5px; /* Réduire l'espace sous le titre */
+        color: #fff; /* Couleur du texte en blanc */
     }
 
     .card-text {
         line-height: 1.0; /* Réduire l'interligne */
         margin-bottom: 5px; /* Réduire l'espace sous la description */
+        color: #fff; /* Couleur du texte en blanc */
     }
 
     .card-body {
         padding: 10px; /* Réduit la hauteur du contenu de la carte */
+        background-color: #333; /* Couleur de fond du contenu de la carte pour un contraste */
     }
 
     .mb-2 {
