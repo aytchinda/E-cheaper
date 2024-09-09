@@ -6,7 +6,7 @@
 
 @section('content')
 <div >
-<h3> Users Details</h3>
+<h3> Roles Details</h3>
 
 <div class="d-flex justify-content-end">
     <div class="dropdown m-1">
@@ -16,42 +16,40 @@
         </button>
         <div id="columnSelector" class="dropdown-menu"> </div>
     </div>
-    <a href="{{ route('admin.user.create') }}" class="btn btn-success m-1">
+    <a href="{{ route('admin.role.create') }}" class="btn btn-success m-1">
 
-            Create User
+            Create Role
 
     </a>
 </div>
 <div class="">
     <div class="card-body">
     <div class="table-responsive">
-        <table  id="User" class="table">
+        <table  id="Role" class="table">
             <thead>
                 <tr>
                     <th scope="col">N#</th>
 						<th scope="col">Name</th>
-						<th scope="col">Email</th>
-						<th scope="col">Email_verified_at</th>
-						<th scope="col">Password</th>
-
+						<th scope="col">Description</th>
+						<th scope="col">Value</th>
+						
 						<th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($users as $user)
-						<tr><td>{{ $user->id }}</td>
-							<td>{{ $user->name }}</td>
-							<td>{{ $user->email }}</td>
-							<td>{{ $user->email_verified_at }}</td>
-							{{-- <td>{{ $user->password }}</td> --}}
+                @foreach($roles as $role)
+						<tr><td>{{ $role->id }}</td>
+							<td>{{ $role->name }}</td>
+							<td>{{ $role->description }}</td>
+							<td>{{ $role->value }}</td>
 						<td>
-                    <a href="{{ route('admin.user.show', ['id' => $user->id]) }}" class="btn btn-primary btn-sm">
+                    <a href="{{ route('admin.role.show', ['id' => $role->id]) }}" class="btn btn-primary btn-sm">
                         <i class="fa-solid fa-eye"></i>
                     </a>
-                    <a href="{{ route('admin.user.edit', ['id' => $user->id]) }}" class="btn btn-success btn-sm">
+                    <a href="{{ route('admin.role.edit', ['id' => $role->id]) }}" class="btn btn-success btn-sm">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </a>
-                    <a href="#" data-id="{{ $user->id }}" class="btn btn-danger btn-sm deleteBtn">
+                    <a href="#" data-id="{{ $role->id }}" class="btn btn-danger btn-sm deleteBtn">
                         <i class="fa-solid fa-trash"></i>
                     </a>
                 </td>
@@ -63,7 +61,7 @@
 
         <!-- Pagination -->
         <div class="d-flex justify-content-center">
-            {{ $users->links('pagination::bootstrap-5') }}
+            {{ $roles->links('pagination::bootstrap-5') }}
         </div>
     </div>
 </div>
@@ -90,7 +88,7 @@
     </div>
 @endsection
 @section('scripts')
-
+   
     <script>
         const checkboxs = document.querySelectorAll('input[type="checkbox"]')
 
@@ -102,7 +100,7 @@
             console.log({ checked, name, id });
             const data = { [name]: checked.toString() };
             const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-            const response = await fetch('/admin/users/speed/' + id, {
+            const response = await fetch('/admin/roles/speed/' + id, {
                 method: 'PUT',
                 body: JSON.stringify(data), // Utilisation de JSON.stringify au lieu de JSON.stringfy
                 headers: {
@@ -112,7 +110,7 @@
             });
         };
         })
-
+        
         const deleteButtons = document.querySelectorAll('.deleteBtn')
         deleteButtons.forEach(deleteButton => {
             deleteButton.addEventListener('click', (event)=>{
@@ -127,7 +125,7 @@
 
                 confirmDeleteBtn.addEventListener('click',async ()=>{
                     const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-                    const response = await fetch('/admin/users/delete/'+id , {
+                    const response = await fetch('/admin/roles/delete/'+id , {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json',
@@ -148,7 +146,7 @@
 
         });
         document.addEventListener('DOMContentLoaded', function() {
-            const tableHeaders = document.querySelectorAll('#User th');
+            const tableHeaders = document.querySelectorAll('#Role th');
             const columnSelector = document.getElementById('columnSelector');
 
             tableHeaders.forEach(function(header, index) {
@@ -163,7 +161,7 @@
                 checkbox.role="switch"
                 checkbox.className = 'columnSelector form-check-input';
                 checkbox.dataset.column = index;
-                const savedSelection = localStorage.getItem('selectedColumns#User');
+                const savedSelection = localStorage.getItem('selectedColumns#Role');
                 checkbox.checked = !!!savedSelection; // Sélectionner par défaut
                 checkbox.addEventListener('change', function() {
                     const columnIndex = parseInt(checkbox.dataset.column);
@@ -206,7 +204,7 @@
         });
 
         function toggleColumn(columnIndex, show) {
-            const dataTable = document.getElementById('User');
+            const dataTable = document.getElementById('Role');
             const cells = dataTable.querySelectorAll(
                 `tr td:nth-child(${columnIndex + 1}), th:nth-child(${columnIndex + 1})`);
 
@@ -223,11 +221,11 @@
             const selectedColumns = Array.from(document.querySelectorAll('.columnSelector'))
                 .filter(c => c.checked)
                 .map(c => c.dataset.column);
-            localStorage.setItem('selectedColumns#User', JSON.stringify(selectedColumns));
+            localStorage.setItem('selectedColumns#Role', JSON.stringify(selectedColumns));
         }
 
         function loadSavedSelection() {
-            const savedSelection = localStorage.getItem('selectedColumns#User');
+            const savedSelection = localStorage.getItem('selectedColumns#Role');
             if (savedSelection) {
                 const selectedColumns = JSON.parse(savedSelection);
                 selectedColumns.forEach(function(columnIndex) {
@@ -241,7 +239,7 @@
         }
 
         function sortTable(columnIndex) {
-            const table = document.getElementById('User');
+            const table = document.getElementById('Role');
             const rows = Array.from(table.querySelectorAll('tbody tr'));
 
             console.log({rows});

@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[HomeController::class,'index' ] )->name ('home')->middleware('preload.page');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::get('/page/{page:slug}',[HomeController::class,'showPage' ] )->name ('page')->middleware('preload.page');
 
 //Routes produits
@@ -66,7 +68,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::prefix('admin')->name('admin.')->group(function(){
+Route::prefix('admin')->name('admin.')->middleware('admin')->group(function(){
 
     //Get Categories datas
     Route::get('/categories', 'App\Http\Controllers\CategoryController@index')->name('category.index');
@@ -92,8 +94,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Delete Category
     Route::delete('/categories/delete/{category}', 'App\Http\Controllers\CategoryController@delete')->name('category.delete');
 
-});
-Route::prefix('admin')->name('admin.')->group(function(){
 
     //Get Products datas
     Route::get('/products', 'App\Http\Controllers\ProductController@index')->name('product.index');
@@ -120,8 +120,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Delete Product
     Route::delete('/products/delete/{product}', 'App\Http\Controllers\ProductController@delete')->name('product.delete');
 
-});
-Route::prefix('admin')->name('admin.')->group(function(){
 
     //Get Users datas
     Route::get('/users', 'App\Http\Controllers\UserController@index')->name('user.index');
@@ -147,9 +145,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Delete User
     Route::delete('/users/delete/{user}', 'App\Http\Controllers\UserController@delete')->name('user.delete');
 
-});
-
-Route::prefix('admin')->name('admin.')->group(function(){
 
     //Get Banners datas
     Route::get('/banners', 'App\Http\Controllers\BannerController@index')->name('banner.index');
@@ -175,8 +170,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Delete Banner
     Route::delete('/banners/delete/{banner}', 'App\Http\Controllers\BannerController@delete')->name('banner.delete');
 
-});
-Route::prefix('admin')->name('admin.')->group(function(){
 
     //Get Shopcollections datas
     Route::get('/shopcollections', 'App\Http\Controllers\ShopcollectionController@index')->name('shopcollection.index');
@@ -202,9 +195,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     //Delete Shopcollection
     Route::delete('/shopcollections/delete/{shopcollection}', 'App\Http\Controllers\ShopcollectionController@delete')->name('shopcollection.delete');
 
-});
 
-Route::prefix('admin')->name('admin.')->group(function(){
 
     //Get Pages datas
     Route::get('/pages', 'App\Http\Controllers\PageController@index')->name('page.index');
@@ -229,5 +220,30 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     //Delete Page
     Route::delete('/pages/delete/{page}', 'App\Http\Controllers\PageController@delete')->name('page.delete');
+
+
+    //Get Roles datas
+    Route::get('/roles', 'App\Http\Controllers\RoleController@index')->name('role.index');
+
+    //Show Role by Id
+    Route::get('/roles/show/{id}', 'App\Http\Controllers\RoleController@show')->name('role.show');
+
+    //Get Roles by Id
+    Route::get('/roles/create', 'App\Http\Controllers\RoleController@create')->name('role.create');
+
+    //Edit Role by Id
+    Route::get('/roles/edit/{id}', 'App\Http\Controllers\RoleController@edit')->name('role.edit');
+
+    //Save new Role
+    Route::post('/roles/store', 'App\Http\Controllers\RoleController@store')->name('role.store');
+
+    //Update One Role
+    Route::put('/roles/update/{role}', 'App\Http\Controllers\RoleController@update')->name('role.update');
+
+    //Update One Role Speedly
+    Route::put('/roles/speed/{role}', 'App\Http\Controllers\RoleController@updateSpeed')->name('role.update.speed');
+
+    //Delete Role
+    Route::delete('/roles/delete/{role}', 'App\Http\Controllers\RoleController@delete')->name('role.delete');
 
 });

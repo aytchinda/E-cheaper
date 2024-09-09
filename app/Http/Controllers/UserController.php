@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\UserFormRequest;
+use App\Models\Role;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -25,32 +27,39 @@ class UserController extends Controller
     }
     public function create(): View
     {
-        return view('users/create');
+        $roles = Role::all();
+        return view('users/create',['roles'=>$roles]);
     }
 
     public function edit($id): View
     {
         $user = User::findOrFail($id);
-        return view('users/edit', ['user' => $user]);
+        $roles = Role::all();
+        return view('users/edit', ['user' => $user,'roles'=>$roles]);
     }
 
     public function store(UserFormRequest $req): RedirectResponse
     {
+        $roles = $req->validated('roles');
         $data = $req->validated();
 
-        
+        $data['password'] = Hash::make($data['password']);
 
         $user = User::create($data);
+        $user->roles()->sync($roles);
         return redirect()->route('admin.user.show', ['id' => $user->id]);
     }
 
     public function update(User $user, UserFormRequest $req)
     {
+        $roles = $req->validated('roles');
         $data = $req->validated();
 
-        
 
+        $data['password'] = Hash::make($data['password']);
         $user->update($data);
+
+        $user->roles()->sync($roles);
 
         return redirect()->route('admin.user.show', ['id' => $user->id]);
     }
@@ -71,7 +80,7 @@ class UserController extends Controller
 
     public function delete(User $user)
     {
-        
+
         $user->delete();
 
         return [
@@ -79,5 +88,5 @@ class UserController extends Controller
         ];
     }
 
-    
+
 }

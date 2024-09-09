@@ -1,38 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cheaper - Your Online Store</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="path/to/your/css/style.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cheaper - Your Shopping Site</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <!-- Custom CSS -->
     <style>
+        /* Général Styling */
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
         }
 
+        /* Header Styling */
         header {
-            background-color: #000;
-            color: #fff;
-            border-bottom: 1px solid #e7e7e7;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ddd;
+            padding: 20px 0;
         }
 
-        .container-fluid {
-            width: 100%;
-            padding: 0 20px;
-            margin: 0 auto;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-        }
-
+        /* Logo */
         .logo {
             display: flex;
             align-items: center;
@@ -44,65 +40,56 @@
         }
 
         .logo h1 {
-            font-size: 24px;
-            color: white;
+            font-size: 22px;
             margin: 0;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            color: #007bff;
         }
 
-        .logo a {
-            text-decoration: none;
-            color: white;
-        }
-
+        /* Search Bar */
         .search-bar {
-            flex-grow: 1;
-            max-width: 600px;
-            margin: 0 20px;
+            flex: 1;
         }
 
         .search-bar form {
             display: flex;
+            justify-content: center;
         }
 
         .search-bar input {
-            flex-grow: 1;
+            width: 80%;
             padding: 10px;
             border: 1px solid #ccc;
-            border-right: none;
-            border-radius: 5px 0 0 5px;
+            border-radius: 4px 0 0 4px;
+            box-shadow: none;
         }
 
         .search-bar button {
             padding: 10px;
-            background-color: #fff;
-            border: 1px solid #fff;
-            color: black;
-            border-radius: 0 5px 5px 0;
+            background-color: #007bff;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            color: white;
             cursor: pointer;
         }
 
-        .user-actions {
-            display: flex;
-            align-items: center;
-        }
-
+        /* User Actions */
         .user-actions a {
-            margin-left: 15px;
-            color: #fff;
+            color: #333;
             text-decoration: none;
-            display: flex;
-            align-items: center;
+            margin-left: 20px;
         }
 
-        .user-actions a span {
-            margin-left: 5px;
+        .user-actions a:hover {
+            color: #007bff;
         }
 
+        .user-actions i {
+            margin-right: 5px;
+        }
+
+        /* Navigation */
         .main-navigation {
-            background-color: #000;
-            border-top: 1px solid #e7e7e7;
+            background-color: #007bff;
             padding: 10px 0;
         }
 
@@ -110,101 +97,164 @@
             list-style: none;
             display: flex;
             justify-content: center;
-            margin: 0;
             padding: 0;
+            margin: 0;
         }
 
         .main-navigation ul li {
-            margin: 0 10px;
-            position: relative;
+            margin: 0 20px;
         }
 
         .main-navigation ul li a {
             color: white;
+            font-size: 16px;
             text-decoration: none;
-            display: block;
-            padding: 5px 10px;
         }
 
         .main-navigation ul li a:hover {
-            background-color: #f8f8f8;
-            border-radius: 5px;
-            color: black;
+            color: #ddd;
         }
 
+        /* Dropdown Menu */
         .dropdown-menu {
             display: none;
             position: absolute;
-            background-color: #000;
-            top: 100%;
-            left: 0;
-            min-width: 160px;
-            z-index: 1;
-            border: 1px solid #e7e7e7;
+            background-color: #fff !important;
+            color: #333 !important;
+            min-width: 150px;
+            z-index: 1000;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
         }
 
-        .main-navigation ul li:hover .dropdown-menu {
+        .dropdown:hover .dropdown-menu,
+        .show > .dropdown-menu {
             display: block;
         }
 
+        /* Liens dans le menu sans effet de survol */
         .dropdown-menu a {
-            color: white;
-            padding: 12px 16px;
-            text-decoration: none;
+            color: #333 !important;
+            padding: 10px 15px;
             display: block;
+            text-decoration: none;
+            background-color: #fff !important;
         }
 
         .dropdown-menu a:hover {
-            background-color: #575757;
+            background-color: #fff !important;
+            color: #333 !important;
+        }
+
+        @media (max-width: 768px) {
+            .search-bar input {
+                width: 100%;
+            }
+
+            .user-actions {
+                justify-content: center;
+                margin-top: 10px;
+            }
+
+            .main-navigation ul {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
+
 <body>
     <header>
-        <div class="container-fluid">
-            <div class="header-top">
-                <div class="logo">
-                    <a href="/">
-                        <img src="path/to/your/logo.png" alt="Logo">
-                        <h1>Cheaper</h1>
-                    </a>
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <!-- Logo -->
+                <div class="col-md-3 col-sm-12">
+                    <div class="logo">
+                        <a href="/">
+                            <img src="path/to/your/logo.png" alt="Logo">
+                            <h1>Cheaper</h1>
+                        </a>
+                    </div>
                 </div>
-                <div class="search-bar">
-                    <form action="/search" method="GET">
-                        <input type="text" name="query" placeholder="Search for products...">
-                        <button type="submit"><i class="fa fa-search"></i></button>
-                    </form>
+
+                <!-- Search Bar -->
+                <div class="col-md-6 col-sm-12 mt-3 mt-md-0">
+                    <div class="search-bar">
+                        <form action="/search" method="GET">
+                            <input type="text" name="query" placeholder="Search for products...">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                        </form>
+                    </div>
                 </div>
-                <div class="user-actions">
-                    <a href="/account" class="user-icon">
-                        <i class="fa fa-user"></i>
-                        <span>Account</span>
-                    </a>
-                    <a href="/wishlist" class="wishlist-icon">
-                        <i class="fa fa-heart"></i>
-                        <span>Wishlist</span>
-                    </a>
-                    <a href="/cart" class="cart-icon">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span>Cart (<span class="cart-count">{{ $cartCount ?? 0 }}</span>)</span>
-                    </a>
+
+                <!-- User Actions -->
+                <div class="col-md-3 col-sm-12 d-flex justify-content-md-end justify-content-center mt-3 mt-md-0">
+                    <div class="user-actions d-flex">
+                        @auth
+                        <a href="{{ route('home') }}">
+                            <i class="fa fa-user"></i>
+                            <span>{{ Auth::user()->name }}</span>
+                        </a>
+                        <!-- Bouton de déconnexion corrigé -->
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fa fa-sign-out-alt"></i>
+                            <span>Logout</span>
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                        @else
+                        <a href="{{ route('signup') }}" class="user-icon">
+                            <i class="fa fa-user-plus"></i>
+                            <span>Signup</span>
+                        </a>
+                        <a href="{{ route('signin') }}" class="user-icon">
+                            <i class="fa fa-sign-in-alt"></i>
+                            <span>Signin</span>
+                        </a>
+                        @endauth
+                        <a href="/wishlist" class="wishlist-icon">
+                            <i class="fa fa-heart"></i>
+                            <span>Wishlist</span>
+                        </a>
+                        <a href="/cart" class="cart-icon">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span>Cart (<span class="cart-count">{{ $cartCount ?? 0 }}</span>)</span>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <nav class="main-navigation">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/shop">Shop</a></li>
-                    <li class="dropdown">
-                        <a href="javascript:void(0)">Pages <i class="fa fa-caret-down"></i></a>
-                        <div class="dropdown-menu">
-                            @foreach (session()->get('pages')['headPages'] as $page)
-                                <a href="{{ route('page', ['page' => $page->slug]) }}">{{ $page->title }}</a>
-                            @endforeach
-                        </div>
-                    </li>
-                </ul>
-            </nav>
         </div>
+
+        <!-- Navigation -->
+        <nav class="main-navigation mt-4">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pages
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @foreach (session()->get('pages')['headPages'] as $page)
+                        <a class="dropdown-item" href="{{ route('page', ['page' => $page->slug]) }}">{{ $page->title }}</a>
+                        @endforeach
+                    </div>
+                </li>
+            </ul>
+        </nav>
     </header>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
+
 </html>

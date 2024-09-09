@@ -71,6 +71,10 @@
     <a class="nav-link" href="{{route('admin.page.index')}}">
         Pages
     </a>
+</li><li class="nav-item">
+    <a class="nav-link" href="{{route('admin.role.index')}}">
+        Roles
+    </a>
 </li></ul>
                 </div>
             </nav>
