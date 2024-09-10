@@ -75,6 +75,10 @@
     <a class="nav-link" href="{{route('admin.role.index')}}">
         Roles
     </a>
+</li><li class="nav-item">
+    <a class="nav-link" href="{{route('admin.carrier.index')}}">
+        Carriers
+    </a>
 </li></ul>
                 </div>
             </nav>

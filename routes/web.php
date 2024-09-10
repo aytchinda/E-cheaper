@@ -36,7 +36,9 @@ Route::get('/shop',[HomeController::class,'shop' ] )->name ('shop')->middleware(
 Route::get('/product/{slug}',[HomeController::class,'showProduct' ] )->name ('product')->middleware('preload.page');
 
  // Routes CArd
-
+ // Routes dans web.php
+Route::post('/cart/increment/{id}', [CartController::class, 'incrementQuantity'])->name('cart.increment');
+Route::post('/cart/decrement/{id}', [CartController::class, 'decrementQuantity'])->name('cart.decrement');
  Route::get('/cart', [cartController::class, 'index'])->name('cart.index')->middleware('preload.page');
  Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('addToCart')->middleware('preload.page');
  Route::delete('/cart/remove/{productId}/{quantity}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
@@ -245,5 +247,34 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function(){
 
     //Delete Role
     Route::delete('/roles/delete/{role}', 'App\Http\Controllers\RoleController@delete')->name('role.delete');
+
+});
+
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    //Get Carriers datas
+    Route::get('/carriers', 'App\Http\Controllers\CarrierController@index')->name('carrier.index');
+
+    //Show Carrier by Id
+    Route::get('/carriers/show/{id}', 'App\Http\Controllers\CarrierController@show')->name('carrier.show');
+
+    //Get Carriers by Id
+    Route::get('/carriers/create', 'App\Http\Controllers\CarrierController@create')->name('carrier.create');
+
+    //Edit Carrier by Id
+    Route::get('/carriers/edit/{id}', 'App\Http\Controllers\CarrierController@edit')->name('carrier.edit');
+
+    //Save new Carrier
+    Route::post('/carriers/store', 'App\Http\Controllers\CarrierController@store')->name('carrier.store');
+
+    //Update One Carrier
+    Route::put('/carriers/update/{carrier}', 'App\Http\Controllers\CarrierController@update')->name('carrier.update');
+
+    //Update One Carrier Speedly
+    Route::put('/carriers/speed/{carrier}', 'App\Http\Controllers\CarrierController@updateSpeed')->name('carrier.update.speed');
+
+
+ //Delete Carrier
+    Route::delete('/carriers/delete/{carrier}', 'App\Http\Controllers\CarrierController@delete')->name('carrier.delete');
 
 });

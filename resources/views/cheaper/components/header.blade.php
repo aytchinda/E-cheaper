@@ -19,13 +19,21 @@
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
+            margin: 0;
         }
 
         /* Header Styling */
         header {
             background-color: #ffffff;
             border-bottom: 1px solid #ddd;
-            padding: 20px 0;
+            padding: 10px 0;
+        }
+
+        /* Alignements des éléments dans le header */
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         /* Logo */
@@ -45,18 +53,21 @@
             color: #007bff;
         }
 
-        /* Search Bar */
+        /* Barre de recherche */
         .search-bar {
             flex: 1;
+            padding: 0 20px;
         }
 
         .search-bar form {
             display: flex;
             justify-content: center;
+            align-items: center;
         }
 
         .search-bar input {
-            width: 80%;
+            width: 100%;
+            max-width: 400px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px 0 0 4px;
@@ -72,11 +83,16 @@
             cursor: pointer;
         }
 
-        /* User Actions */
+        /* Actions utilisateur */
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+
         .user-actions a {
             color: #333;
             text-decoration: none;
-            margin-left: 20px;
+            margin-left: 15px;
         }
 
         .user-actions a:hover {
@@ -87,7 +103,7 @@
             margin-right: 5px;
         }
 
-        /* Navigation */
+        /* Navigation principale */
         .main-navigation {
             background-color: #007bff;
             padding: 10px 0;
@@ -165,86 +181,86 @@
 
 <body>
     <header>
-        <div class="container">
-            <div class="row align-items-center justify-content-between">
-                <!-- Logo -->
-                <div class="col-md-3 col-sm-12">
-                    <div class="logo">
-                        <a href="/">
-                            <img src="path/to/your/logo.png" alt="Logo">
-                            <h1>Cheaper</h1>
-                        </a>
-                    </div>
-                </div>
+        <div class="container header-content">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="/">
+                    <img src="path/to/your/logo.png" alt="Logo">
+                    <h1>Cheaper</h1>
+                </a>
+            </div>
 
-                <!-- Search Bar -->
-                <div class="col-md-6 col-sm-12 mt-3 mt-md-0">
-                    <div class="search-bar">
-                        <form action="/search" method="GET">
-                            <input type="text" name="query" placeholder="Search for products...">
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                </div>
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <form action="/search" method="GET">
+                    <input type="text" name="query" placeholder="Search for products...">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
 
-                <!-- User Actions -->
-                <div class="col-md-3 col-sm-12 d-flex justify-content-md-end justify-content-center mt-3 mt-md-0">
-                    <div class="user-actions d-flex">
-                        @auth
-                        <a href="{{ route('home') }}">
-                            <i class="fa fa-user"></i>
-                            <span>{{ Auth::user()->name }}</span>
-                        </a>
-                        <!-- Bouton de déconnexion corrigé -->
-                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="fa fa-sign-out-alt"></i>
-                            <span>Logout</span>
-                        </a>
+            <!-- User Actions -->
+            <div class="user-actions">
+                @auth
+                <a href="{{ route('home') }}">
+                    <i class="fa fa-user"></i>
+                    <span>{{ Auth::user()->name }}</span>
+                </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                        @else
-                        <a href="{{ route('signup') }}" class="user-icon">
-                            <i class="fa fa-user-plus"></i>
-                            <span>Signup</span>
-                        </a>
-                        <a href="{{ route('signin') }}" class="user-icon">
-                            <i class="fa fa-sign-in-alt"></i>
-                            <span>Signin</span>
-                        </a>
-                        @endauth
-                        <a href="/wishlist" class="wishlist-icon">
-                            <i class="fa fa-heart"></i>
-                            <span>Wishlist</span>
-                        </a>
-                        <a href="/cart" class="cart-icon">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span>Cart (<span class="cart-count">{{ $cartCount ?? 0 }}</span>)</span>
-                        </a>
-                    </div>
-                </div>
+                @if (auth()->user()->isAdmin())
+                <a href="{{ route('admin.product.index') }}" class="user-icon">
+                    <i class="fa fa-user"></i>
+                    <span>Admin Dashboard</span>
+                </a>
+                @endif
+
+                <!-- Bouton de déconnexion -->
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fa fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                @else
+                <a href="{{ route('signup') }}" class="user-icon">
+                    <i class="fa fa-user-plus"></i>
+                    <span>Signup</span>
+                </a>
+                <a href="{{ route('signin') }}" class="user-icon">
+                    <i class="fa fa-sign-in-alt"></i>
+                    <span>Signin</span>
+                </a>
+                @endauth
+                <a href="/wishlist" class="wishlist-icon">
+                    <i class="fa fa-heart"></i>
+                    <span>Wishlist</span>
+                </a>
+                <a href="/cart" class="cart-icon">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>Cart (<span class="cart-count">{{ $cartCount ?? 0 }}</span>)</span>
+                </a>
             </div>
         </div>
-
-        <!-- Navigation -->
-        <nav class="main-navigation mt-4">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/shop">Shop</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Pages
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        @foreach (session()->get('pages')['headPages'] as $page)
-                        <a class="dropdown-item" href="{{ route('page', ['page' => $page->slug]) }}">{{ $page->title }}</a>
-                        @endforeach
-                    </div>
-                </li>
-            </ul>
-        </nav>
     </header>
+
+    <!-- Navigation -->
+    <nav class="main-navigation mt-4">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/shop">Shop</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Pages
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    @foreach (session()->get('pages')['headPages'] as $page)
+                    <a class="dropdown-item" href="{{ route('page', ['page' => $page->slug]) }}">{{ $page->title }}</a>
+                    @endforeach
+                </div>
+            </li>
+        </ul>
+    </nav>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
