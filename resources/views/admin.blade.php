@@ -79,6 +79,10 @@
     <a class="nav-link" href="{{route('admin.carrier.index')}}">
         Carriers
     </a>
+</li><li class="nav-item">
+    <a class="nav-link" href="{{route('admin.address.index')}}">
+        Addresses
+    </a>
 </li></ul>
                 </div>
             </nav>

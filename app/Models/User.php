@@ -54,4 +54,12 @@ class User extends Authenticatable
         return $this->roles()->where('value', 'ROLE_ADMIN')->exists();
     }
 
+
+	public function addresses()
+	{
+		
+		return $this->hasMany(\App\Models\Address::class);
+	
+	}
+
 }

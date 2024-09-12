@@ -144,7 +144,7 @@
         }
 
         .dropdown:hover .dropdown-menu,
-        .show > .dropdown-menu {
+        .show>.dropdown-menu {
             display: block;
         }
 
@@ -181,7 +181,7 @@
 
 <body>
     <header>
-        <div class="container header-content">
+        <div class="container-fluid header-content">
             <!-- Logo -->
             <div class="logo">
                 <a href="/">
@@ -201,36 +201,42 @@
             <!-- User Actions -->
             <div class="user-actions">
                 @auth
-                <a href="{{ route('home') }}">
-                    <i class="fa fa-user"></i>
-                    <span>{{ Auth::user()->name }}</span>
-                </a>
+                    <a href="{{ route('home') }}">
+                        <i class="fa fa-user"></i>
+                        <span>{{ Auth::user()->name }}</span>
+                    </a>
 
-                @if (auth()->user()->isAdmin())
-                <a href="{{ route('admin.product.index') }}" class="user-icon">
-                    <i class="fa fa-user"></i>
-                    <span>Admin Dashboard</span>
-                </a>
-                @endif
+                    @if (auth()->user()->isAdmin())
+                        <a href="{{ route('admin.product.index') }}" class="user-icon">
+                            <i class="fa fa-user"></i>
+                            <span>Admin Dashboard</span>
+                        </a>
+                    @else
+                        <!-- Si l'utilisateur n'est pas admin, afficher seulement Dashboard -->
+                        <a href="{{ route('dashboard.index') }}" class="user-icon">
+                            <i class="fa fa-user"></i> <!-- Icône simple pour utilisateur non admin -->
+                            <span>Dashboard</span>
+                        </a>
+                    @endif
 
-                <!-- Bouton de déconnexion -->
-                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fa fa-sign-out-alt"></i>
-                    <span>Logout</span>
-                </a>
+                    <!-- Bouton de déconnexion -->
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
 
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
                 @else
-                <a href="{{ route('signup') }}" class="user-icon">
-                    <i class="fa fa-user-plus"></i>
-                    <span>Signup</span>
-                </a>
-                <a href="{{ route('signin') }}" class="user-icon">
-                    <i class="fa fa-sign-in-alt"></i>
-                    <span>Signin</span>
-                </a>
+                    <a href="{{ route('signup') }}" class="user-icon">
+                        <i class="fa fa-user-plus"></i>
+                        <span>Signup</span>
+                    </a>
+                    <a href="{{ route('signin') }}" class="user-icon">
+                        <i class="fa fa-sign-in-alt"></i>
+                        <span>Signin</span>
+                    </a>
                 @endauth
                 <a href="/wishlist" class="wishlist-icon">
                     <i class="fa fa-heart"></i>
@@ -250,12 +256,14 @@
             <li><a href="/">Home</a></li>
             <li><a href="/shop">Shop</a></li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Pages
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     @foreach (session()->get('pages')['headPages'] as $page)
-                    <a class="dropdown-item" href="{{ route('page', ['page' => $page->slug]) }}">{{ $page->title }}</a>
+                        <a class="dropdown-item"
+                            href="{{ route('page', ['page' => $page->slug]) }}">{{ $page->title }}</a>
                     @endforeach
                 </div>
             </li>

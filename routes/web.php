@@ -1,13 +1,15 @@
 <?php
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CompareController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CompareController;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -56,11 +58,20 @@ Route::post('/compare/submit', [CompareController::class, 'submitComparison'])->
 
 
 
+//Route Dashboard Utilisateur
+Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/',[DashboardController::class, 'index'])->name('index');
+    Route::get('/address/add',[DashboardController::class, 'createAddress'])->name('address.add');
+    Route::get('/address/edit/{id}',[DashboardController::class, 'addressEdit'])->name('address.edit');
+    Route::post('/address/store',[DashboardController::class, 'store'])->name('address.store');
+    Route::put('/address/update/{address}',[DashboardController::class, 'update'])->name('address.update');
+    Route::delete('/address/delete/{id}',[DashboardController::class, 'delete'])->name('address.delete');
+});
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard-old', function () {
+})->middleware(['auth', 'verified'])->name('dashboard-old');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -276,5 +287,33 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
  //Delete Carrier
     Route::delete('/carriers/delete/{carrier}', 'App\Http\Controllers\CarrierController@delete')->name('carrier.delete');
+
+});
+
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    //Get Addresses datas
+    Route::get('/addresses', 'App\Http\Controllers\AddressController@index')->name('address.index');
+
+    //Show Address by Id
+    Route::get('/addresses/show/{id}', 'App\Http\Controllers\AddressController@show')->name('address.show');
+
+    //Get Addresses by Id
+    Route::get('/addresses/create', 'App\Http\Controllers\AddressController@create')->name('address.create');
+
+    //Edit Address by Id
+    Route::get('/addresses/edit/{id}', 'App\Http\Controllers\AddressController@edit')->name('address.edit');
+
+    //Save new Address
+    Route::post('/addresses/store', 'App\Http\Controllers\AddressController@store')->name('address.store');
+
+    //Update One Address
+    Route::put('/addresses/update/{address}', 'App\Http\Controllers\AddressController@update')->name('address.update');
+
+    //Update One Address Speedly
+    Route::put('/addresses/speed/{address}', 'App\Http\Controllers\AddressController@updateSpeed')->name('address.update.speed');
+
+    //Delete Address
+    Route::delete('/addresses/delete/{address}', 'App\Http\Controllers\AddressController@delete')->name('address.delete');
 
 });
