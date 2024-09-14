@@ -83,6 +83,10 @@
     <a class="nav-link" href="{{route('admin.address.index')}}">
         Addresses
     </a>
+</li><li class="nav-item">
+    <a class="nav-link" href="{{route('admin.method.index')}}">
+        Methods
+    </a>
 </li></ul>
                 </div>
             </nav>

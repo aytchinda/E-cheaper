@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Carrier;
 use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
@@ -60,18 +61,18 @@ class CartService
     public function updateQuantity($productId, $quantityChange)
     {
         $cart = session()->get('cart');
-    
+
         if (isset($cart['items'][$productId])) {
             $cart['items'][$productId]['quantity'] += $quantityChange;
-    
+
             if ($cart['items'][$productId]['quantity'] < 1) {
                 unset($cart['items'][$productId]);
             }
-    
+
             session()->put('cart', $cart);
         }
     }
-    
+
 
     public function getCartDetails()
     {
@@ -83,7 +84,11 @@ class CartService
             'items' => [],
             'sub_total' => 0,
             'cart_count' => 0,
+            'sub_total_with_shipping' => 0 // Initialisation du total avec frais de livraison
         ];
+
+        // Récupérer le transporteur sélectionné ou le premier transporteur par défaut
+        $carrier = Session::get('carrier', Carrier::first());
 
         // Boucle sur chaque élément du panier pour préparer les détails
         foreach ($cart['items'] as $productId => $item) {
@@ -94,6 +99,7 @@ class CartService
                     'product' => [
                         'id' => $product->id,
                         'name' => $product->name,
+                        'description' => $product->description,
                         'soldePrice' => $product->soldePrice,
                         'regularPrice' => $product->regularPrice,
                         'imageUrls' => $product->imageUrls, // Assurez-vous que c'est bien ce que vous attendez
@@ -102,14 +108,23 @@ class CartService
                     'sub_total' => $item['sub_total'],
                 ];
 
-                // Calculer le total et le nombre d'articles dans le panier
+                // Calculer le sous-total et le nombre d'articles dans le panier
                 $result['sub_total'] += $item['sub_total'];
                 $result['cart_count'] += $item['quantity'];
             }
         }
 
+        // Ajouter les frais de livraison au total si un transporteur est sélectionné
+        if ($carrier) {
+            $shipping_cost = $carrier->price;
+            $result['sub_total_with_shipping'] = $result['sub_total'] + $shipping_cost;
+        } else {
+            $result['sub_total_with_shipping'] = $result['sub_total']; // Si pas de frais de livraison
+        }
+
         return $result;
     }
+
 
     public function getCartCount()
 {

@@ -76,6 +76,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified'])
 
 // Route DU CHECKOUT
 Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout');
+Route::post('/checkout/create-payment-intent',[CheckoutController::class, 'createPaymentIntent'])->name('checkout.payment.intent');
 
 
 
@@ -300,6 +301,34 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::delete('/carriers/delete/{carrier}', 'App\Http\Controllers\CarrierController@delete')->name('carrier.delete');
 
 });
+
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    // Get Methods datas
+    Route::get('/methods', 'App\Http\Controllers\MethodController@index')->name('method.index');
+
+    // Show Method by Id
+    Route::get('/methods/show/{id}', 'App\Http\Controllers\MethodController@show')->name('method.show');
+
+    // Get Methods by Id (for creating new method)
+    Route::get('/methods/create', 'App\Http\Controllers\MethodController@create')->name('method.create');
+
+    // Edit Method by Id
+    Route::get('/methods/edit/{id}', 'App\Http\Controllers\MethodController@edit')->name('method.edit');
+
+    // Save new Method
+    Route::post('/methods/store', 'App\Http\Controllers\MethodController@store')->name('method.store');
+
+    // Update One Method
+    Route::put('/methods/update/{method}', 'App\Http\Controllers\MethodController@update')->name('method.update');
+
+    // Update One Method Speedly
+    Route::put('/methods/speed/{method}', 'App\Http\Controllers\MethodController@updateSpeed')->name('method.update.speed');
+
+    // Delete Method
+    Route::delete('/methods/delete/{method}', 'App\Http\Controllers\MethodController@delete')->name('method.delete');
+});
+
 
 Route::prefix('admin')->name('admin.')->group(function(){
 
