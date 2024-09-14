@@ -13,11 +13,12 @@
                     <a href="#" class="list-group-item list-group-item-action active">
                         <i class="fas fa-tachometer-alt"></i> Dashboard
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="{{ route('dashboard.address') }}" class="list-group-item list-group-item-action">
                         <i class="fas fa-map-marker-alt"></i> My Addresses
                     </a>
                     <a href="{{ route('profile.edit') }}" class="list-group-item list-group-item-action">
                         <i class="fas fa-user"></i> Account Details
+
                     </a>
                     <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                         class="list-group-item list-group-item-action">

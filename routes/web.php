@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CompareController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -61,12 +63,21 @@ Route::post('/compare/submit', [CompareController::class, 'submitComparison'])->
 //Route Dashboard Utilisateur
 Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/',[DashboardController::class, 'index'])->name('index');
+    Route::get('/address',[DashboardController::class, 'index'])->name('address');
+    Route::get('/orders',[DashboardController::class, 'index'])->name('orders');
+    Route::get('/account',[DashboardController::class, 'index'])->name('account');
+    Route::get('/logout',[DashboardController::class, 'index'])->name('logout');
     Route::get('/address/add',[DashboardController::class, 'createAddress'])->name('address.add');
     Route::get('/address/edit/{id}',[DashboardController::class, 'addressEdit'])->name('address.edit');
     Route::post('/address/store',[DashboardController::class, 'store'])->name('address.store');
     Route::put('/address/update/{address}',[DashboardController::class, 'update'])->name('address.update');
     Route::delete('/address/delete/{id}',[DashboardController::class, 'delete'])->name('address.delete');
 });
+
+// Route DU CHECKOUT
+Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout');
+
+
 
 
 Route::get('/dashboard-old', function () {

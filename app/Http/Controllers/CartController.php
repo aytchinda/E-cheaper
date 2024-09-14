@@ -16,8 +16,8 @@ class CartController extends Controller
         $cart = $cartService->getCartDetails();
         $carriers = Carrier::all();
 
-        // Récupère l'ID du transporteur sélectionné via le formulaire (ou utilise un transporteur par défaut)
-        $carrierId = $req->input('carrier_id');
+        // Vérifier si un transporteur est déjà stocké dans la session
+        $carrierId = $req->input('carrier_id') ?? session('selected_carrier_id');
         $selectedCarrier = null;
 
         if ($carrierId && is_numeric($carrierId)) {
@@ -30,12 +30,16 @@ class CartController extends Controller
             $selectedCarrier = Carrier::first();
         }
 
+        // Stocker le transporteur sélectionné dans la session
+        session(['selected_carrier_id' => $selectedCarrier->id]);
+
         return view('cheaper.cart', [
             'cart' => $cart,
             'carriers' => $carriers,
             'selectedCarrier' => $selectedCarrier // Passe correctement le transporteur sélectionné à la vue
         ]);
     }
+
 
     // Ajouter un produit au panier
     public function addToCart(CartService $cartService, $productId, Request $request)
