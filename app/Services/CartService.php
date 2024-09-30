@@ -106,6 +106,7 @@ class CartService
                     ],
                     'quantity' => $item['quantity'],
                     'sub_total' => $item['sub_total'],
+                    
                 ];
 
                 // Calculer le sous-total et le nombre d'articles dans le panier

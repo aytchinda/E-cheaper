@@ -127,6 +127,7 @@ class CheckoutController extends Controller
         $carrier = Session::get('carrier', Carrier::first());
         $taxerate = 0.21;
 
+
         $order->clientName = $user->name;
         $order->billing_address = $billing_address;
         $order->shipping_address = $shipping_address;

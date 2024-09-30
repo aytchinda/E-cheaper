@@ -43,7 +43,7 @@ Route::get('/product/{slug}',[HomeController::class,'showProduct' ] )->name ('pr
  // Routes dans web.php
 Route::post('/cart/increment/{id}', [CartController::class, 'incrementQuantity'])->name('cart.increment');
 Route::post('/cart/decrement/{id}', [CartController::class, 'decrementQuantity'])->name('cart.decrement');
- Route::get('/cart', [cartController::class, 'index'])->name('cart.index')->middleware('preload.page');
+Route::get('/cart', [cartController::class, 'index'])->name('cart.index')->middleware('preload.page');
  Route::post('/cart/add/{productId}', [CartController::class, 'addToCart'])->name('addToCart')->middleware('preload.page');
  Route::delete('/cart/remove/{productId}/{quantity}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 

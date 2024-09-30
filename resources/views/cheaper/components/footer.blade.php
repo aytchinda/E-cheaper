@@ -26,6 +26,7 @@
             background-color: #000; /* Couleur de fond noire */
             color: #fff; /* Couleur du texte en blanc pour le contraste */
             border-top: 1px solid #444; /* Ajuster la couleur de la bordure supérieure pour un contraste */
+            padding: 10px 0; /* Réduit le padding général du footer */
         }
 
         .container {
@@ -38,33 +39,33 @@
             display: flex;
             flex-wrap: wrap; /* Ajout de wrap pour une meilleure réactivité sur les petits écrans */
             justify-content: space-between;
-            padding: 20px 0;
+            padding: 10px 0; /* Réduit le padding entre les sections */
         }
 
         .footer-section {
             flex: 1;
             margin: 0 10px;
-            min-width: 200px; /* Assurez-vous que les sections ne deviennent pas trop petites */
+            min-width: 180px; /* Ajuste la largeur minimale pour compacter les sections */
         }
 
         .footer-section h4 {
-            margin-bottom: 10px;
-            color: #fff; /* Assurez-vous que les titres sont en blanc */
+            margin-bottom: 8px; /* Réduit l'espace sous les titres */
+            font-size: 16px; /* Réduit la taille des titres */
+            color: #fff;
         }
 
-        .footer-section p {
-            margin: 0 0 15px;
-            color: #ccc; /* Utiliser une couleur de texte légèrement différente pour le corps du texte */
+        .footer-section p,
+        .footer-section ul li {
+            margin: 0 0 10px; /* Réduit les marges autour du texte */
+            font-size: 14px; /* Réduit la taille de la police */
+            line-height: 1.4; /* Réduit l'espacement entre les lignes */
+            color: #ccc; /* Couleur du texte légèrement différente */
         }
 
         .footer-section ul {
             list-style: none;
             padding: 0;
             margin: 0;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 10px;
         }
 
         .footer-section ul li a {
@@ -92,34 +93,37 @@
         }
 
         .footer-section form input {
-            padding: 10px;
-            border: 1px solid #444; /* Couleur de la bordure pour correspondre au thème sombre */
+            padding: 8px; /* Réduit la taille du champ d'email */
+            border: 1px solid #444;
             border-right: none;
             flex-grow: 1;
             border-radius: 5px 0 0 5px;
-            background-color: #333; /* Couleur de fond du champ de texte */
-            color: #fff; /* Couleur du texte dans le champ de texte */
+            background-color: #333;
+            color: #fff;
+            font-size: 14px;
         }
 
         .footer-section form button {
-            padding: 10px;
+            padding: 8px;
             background-color: #007bff; /* Couleur du bouton */
             border: 1px solid #007bff;
             color: white;
             border-radius: 0 5px 5px 0;
             cursor: pointer;
+            font-size: 14px; /* Réduit la taille du bouton */
         }
 
         .footer-bottom {
             text-align: center;
-            padding: 10px 0;
-            border-top: 1px solid #444; /* Ajuster la couleur de la bordure supérieure pour un contraste */
-            margin-top: 20px;
+            padding: 5px 0; /* Réduit l'espace en bas du footer */
+            border-top: 1px solid #444;
+            margin-top: 10px;
         }
 
         .footer-bottom p {
             margin: 0;
-            color: #ccc; /* Couleur du texte pour correspondre au thème sombre */
+            font-size: 13px; /* Réduit la taille du texte */
+            color: #ccc;
         }
     </style>
 </head>
@@ -143,10 +147,7 @@
                         <li><a href="/">Home</a></li>
                         <li><a href="/shop">Shop</a></li>
                         <li><a href="/about">About Us</a></li>
-                        <li><a href="/contact">Contact</a></li>
-                        <li><a href="/faq">FAQ</a></li>
                         <li><a href="/terms">Terms of Service</a></li>
-                        <li><a href="/privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
