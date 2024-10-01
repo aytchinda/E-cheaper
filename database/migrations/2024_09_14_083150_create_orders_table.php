@@ -24,6 +24,8 @@ return new class extends Migration
 			$table->string('carrier_name');
 			$table->integer('carrier_price');
 			$table->string('payment_method');
+            $table->string('stripe_payment_intent')->nullable();
+
         	$table->timestamps();
         });
     }

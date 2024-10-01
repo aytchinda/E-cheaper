@@ -76,7 +76,9 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified'])
 
 // Route DU CHECKOUT
 Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout');
-Route::post('/checkout/create-payment-intent',[CheckoutController::class, 'createPaymentIntent'])->name('checkout.payment.intent');
+Route::get('/checkout/payment/success',[CheckoutController::class, 'paymentSuccess'])->name('checkout.payment.success');
+Route::post('/checkout/create-payment-intent/{id}',[CheckoutController::class, 'createPaymentIntent'])->name('checkout.payment.intent');
+
 
 
 

@@ -373,7 +373,8 @@
         // Fetches a payment intent and captures the client secret
         async function initialize() {
 
-            const urlPath = window.location.origin + '/checkout/create-payment-intent';
+            const urlPath = window.location.origin + '/checkout/create-payment-intent/{{ $orderID }}';
+
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             const {
                 clientSecret,
@@ -406,13 +407,15 @@
             e.preventDefault();
             setLoading(true);
 
+            const redirectUrl = window.location.origin + '/checkout/payment/success';
+
             const {
                 error
             } = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
                     // Make sure to change this to your payment completion page
-                    return_url: "http://localhost:4242/complete.html",
+                    return_url: redirectUrl,
                 },
             });
 

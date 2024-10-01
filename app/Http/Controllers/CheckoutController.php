@@ -102,22 +102,49 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function createPaymentIntent(Request $request)
+    public function createPaymentIntent(Request $request, $orderID)
     {
         $stripe = new \Stripe\StripeClient($this->stripeService->getPrivateKey());
 
+        $order = Order::find($orderID);
+        $amount = intval($order->order_cost_ttc * 100,0);
+
         $paymentIntent = $stripe->paymentIntents->create([
-            'amount' => 1900,
+            'amount' => $amount,
             'currency' => 'eur',
             'automatic_payment_methods' => [
                 'enabled' => true,
             ],
         ]);
 
+        $order->stripe_payment_intent = $paymentIntent->client_secret;
+
+        $order->save();
+
         return [
             'clientSecret' => $paymentIntent->client_secret
         ];
     }
+
+    public function paymentSuccess(Request $request){
+         $stripe_payment_intent = $request->payment_intent_client_secret;
+         $redirect_status = $request->redirect_status;
+
+         if($redirect_status == "succeeded"){
+             $order = Order::where([
+
+                'isPaid'=>false,
+                'stripe_payment_intent'=> $stripe_payment_intent
+                ])->first();
+
+             if($order){
+                $order->isPaid = true;
+             $order->save();
+             }
+
+         }
+         return view('cheaper.ordercompleted',['order' => $order]);
+        }
 
     protected function createOrder($billing_address, $shipping_address)
     {
