@@ -5,11 +5,13 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CompareController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -38,6 +40,8 @@ Route::get('/shop',[HomeController::class,'shop' ] )->name ('shop')->middleware(
 
 //RoUTES SHOP
 Route::get('/product/{slug}',[HomeController::class,'showProduct' ] )->name ('product')->middleware('preload.page');
+Route::get('/shop/category/{slug}', [HomeController::class, 'shopByCategory'])->name('shop.category');
+
 
  // Routes CArd
  // Routes dans web.php
@@ -78,6 +82,24 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified'])
 Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout');
 Route::get('/checkout/payment/success',[CheckoutController::class, 'paymentSuccess'])->name('checkout.payment.success');
 Route::post('/checkout/create-payment-intent/{id}',[CheckoutController::class, 'createPaymentIntent'])->name('checkout.payment.intent');
+
+//ROUTES LANGUES
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'fr', 'es'])) {
+        session(['locale' => $locale]);
+        app()->setLocale($locale);
+        // dd(vars: session('locale')); // Vérifie la valeur enregistrée dans la session
+
+    }
+
+    return redirect()->back();
+})->name('change.language');
+
+//SEARCH
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+
+
+
 
 
 
@@ -229,6 +251,7 @@ Route::prefix('admin')->name('admin.')->middleware('admin')->group(function(){
 
     //Show Page by Id
     Route::get('/pages/show/{id}', 'App\Http\Controllers\PageController@show')->name('page.show');
+
 
     //Get Pages by Id
     Route::get('/pages/create', 'App\Http\Controllers\PageController@create')->name('page.create');

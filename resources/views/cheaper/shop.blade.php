@@ -10,19 +10,29 @@
     <div class="row">
         <!-- Barre latérale -->
         <div class="col-md-3">
-            <h5>Catégories</h5>
-            <ul class="list-group">
-                <li class="list-group-item">Femmes</li>
-                <li class="list-group-item">Hommes</li>
-                <li class="list-group-item">Chaussures</li>
-                <li class="list-group-item">T-Shirts</li>
-            </ul>
+            <!-- Catégories modernisées avec cartes -->
+            <h5 class="text-primary">Catégories</h5>
+            <div class="list-group">
+                @foreach($categories as $category)
+                    <a href="{{ route('shop.category', $category->slug) }}" class="list-group-item list-group-item-action d-flex align-items-center">
+                        <!-- Icône de la catégorie (ajustez l'icône selon la catégorie) -->
+                        <i class="fas fa-tags me-3 text-secondary"></i>
+                        <span>{{ $category->name }}</span>
+                    </a>
+                @endforeach
+            </div>
 
-            <h5 class="mt-4">Filtre</h5>
-            <h6>Prix</h6>
-            <input type="range" class="form-range" id="priceRange" min="0" max="200">
+            <!-- Filtres améliorés -->
+            <h5 class="mt-4 text-primary">Filtre</h5>
 
-            <h5 class="mt-4">Marque</h5>
+            <!-- Filtre par prix -->
+            <div class="mb-3">
+                <h6 class="text-muted">Prix</h6>
+                <input type="range" class="form-range" id="priceRange" min="0" max="200">
+            </div>
+
+            <!-- Filtre par marque -->
+            <h5 class="mt-4 text-primary">Marque</h5>
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="brand1">
                 <label class="form-check-label" for="brand1">Nouveautés</label>
@@ -32,6 +42,40 @@
                 <label class="form-check-label" for="brand2">Éclairage</label>
             </div>
         </div>
+
+        <!-- CSS supplémentaire pour rendre la vue plus moderne -->
+        <style>
+            .list-group-item {
+                border: none;
+                border-radius: 5px;
+                transition: all 0.3s ease;
+                background-color: #f8f9fa;
+            }
+
+            .list-group-item:hover {
+                background-color: #e2e6ea;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .form-range {
+                background-color: #ddd;
+            }
+
+            .form-check-input:checked {
+                background-color: #007bff;
+                border-color: #007bff;
+            }
+
+            .text-primary {
+                color: #007bff !important;
+            }
+        </style>
+
+        <!-- Import FontAwesome -->
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
 
         <!-- Zone de contenu principal -->
         <div class="col-md-9">
