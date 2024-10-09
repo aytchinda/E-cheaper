@@ -14,6 +14,8 @@
                             <div class="product-details">
                                 <h5 class="product-title">{{ $product->name }}</h5>
                                 <p class="product-description">{{ $product->description }}</p>
+                                <p class="product-more-description">{{ $product->moreDescrciption }}</p>
+
                                 <div class="product-price">
                                     <span class="price">€{{ number_format($product->soldePrice, 2, ',', ' ') }}</span>
                                     <del>€{{ number_format($product->regularPrice, 2, ',', ' ') }}</del>
@@ -44,6 +46,8 @@
                             <div class="product-details">
                                 <h5 class="product-title">{{ $product->name }}</h5>
                                 <p class="product-description">{{ $product->description }}</p>
+                                <p class="product-more-description">{{ $product->moreDescrciption }}</p>
+                                {{-- <p class="product-additional-info">{{ $product->additionalInfos }} --}}
                                 <div class="product-price">
                                     <span class="price">€{{ number_format($product->soldePrice, 2, ',', ' ') }}</span>
                                     <del>€{{ number_format($product->regularPrice, 2, ',', ' ') }}</del>
@@ -74,6 +78,8 @@
                             <div class="product-details">
                                 <h5 class="product-title">{{ $product->name }}</h5>
                                 <p class="product-description">{{ $product->description }}</p>
+                                <p class="product-more-description">{{ $product->moreDescrciption }}</p>
+
                                 <div class="product-price">
                                     <span class="price">€{{ number_format($product->soldePrice, 2, ',', ' ') }}</span>
                                     <del>€{{ number_format($product->regularPrice, 2, ',', ' ') }}</del>
@@ -104,6 +110,8 @@
                             <div class="product-details">
                                 <h5 class="product-title">{{ $product->name }}</h5>
                                 <p class="product-description">{{ $product->description }}</p>
+                                <p class="product-more-description">{{ $product->moreDescrciption }}</p>
+
                                 <div class="product-price">
                                     <span class="price">€{{ number_format($product->soldePrice, 2, ',', ' ') }}</span>
                                     <del>€{{ number_format($product->regularPrice, 2, ',', ' ') }}</del>
@@ -146,10 +154,18 @@
         text-decoration: none;
         color: black;
         font-size: 18px;
+        transition: color 0.3s ease;
+    }
+
+    .exclusive-products-menu a:hover {
+        color: #007bff;
+        /* Color change on hover */
     }
 
     .exclusive-products-menu a.active {
         font-weight: bold;
+        color: #007bff;
+        /* Active link color */
     }
 
     .product-category {
@@ -166,68 +182,100 @@
 
     .product-card {
         text-align: left;
-        border: none;
-        padding: 5px; /* Reduced padding */
+        border: 1px solid #ddd;
+        /* Light border for better separation */
+        padding: 10px;
         display: flex;
         flex-direction: column;
+        background-color: #fff;
+        /* Background color for a clean look */
+        border-radius: 8px;
+        /* Rounded corners */
+        transition: box-shadow 0.3s ease;
         height: 100%;
+    }
+
+    .product-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        /* Subtle shadow on hover */
     }
 
     .product-image {
         width: 100%;
-        height: 350px; /* Increased height for the images */
-        overflow: hidden; /* Hide any overflow */
+        height: 300px;
+        /* Slightly reduced height for the images */
+        overflow: hidden;
+        /* Hide any overflow */
+        border-radius: 8px 8px 0 0;
+        /* Rounded corners on the top of the card */
     }
 
     .product-image img {
         width: 100%;
         height: 100%;
-        object-fit: contain; /* Ensure the image is fully visible within the container */
+        object-fit: cover;
+        /* Cover image for a cleaner appearance */
     }
 
     .product-details {
         padding-top: 10px;
         margin-top: 0;
-        margin-left: 2%;
-        line-height: 1.2;
+        line-height: 1.4;
         flex-grow: 1;
     }
 
     .product-title {
-        font-size: 1.25rem;
+        font-size: 1.15rem;
         font-weight: bold;
-        margin: 0;
-        margin-bottom: 2px;
+        margin: 5px 0;
+        color: #333;
+        /* Darker text for better readability */
     }
 
-    .product-description {
-        font-size: 0.8rem;
-        margin: 0;
-        margin-bottom: 2px;
+    .product-description,
+    .product-more-description,
+    .product-additional-info {
+        font-size: 0.85rem;
+        margin: 5px 0;
+        color: #666;
+        /* Soft grey for descriptions */
     }
 
     .product-price {
         font-size: 1rem;
-        margin: 0;
+        margin: 10px 0 5px;
         display: flex;
         align-items: center;
+        font-weight: bold;
     }
 
     .product-price .price {
-        color: red;
-        font-size: 1rem;
-        margin-right: 5px;
+        color: #e74c3c;
+        /* Slightly darker red for a modern look */
+        font-size: 1.15rem;
+        margin-right: 10px;
     }
 
     .product-price del {
-        color: grey;
+        color: #95a5a6;
+        /* Softer grey for the old price */
         font-size: 0.9rem;
-        margin-right: 5px;
+        margin-right: 10px;
     }
 
     .product-price .on_sale {
-        color: green;
+        color: #27ae60;
+        /* A more vibrant green for the discount */
         font-size: 0.9rem;
+    }
+
+    .product-card a {
+        text-decoration: none;
+    }
+
+    .product-card a:hover .product-title {
+        color: #007bff;
+        /* Title color changes on hover */
     }
 </style>
 

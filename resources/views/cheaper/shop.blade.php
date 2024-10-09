@@ -15,7 +15,6 @@
             <div class="list-group">
                 @foreach($categories as $category)
                     <a href="{{ route('shop.category', $category->slug) }}" class="list-group-item list-group-item-action d-flex align-items-center">
-                        <!-- Icône de la catégorie (ajustez l'icône selon la catégorie) -->
                         <i class="fas fa-tags me-3 text-secondary"></i>
                         <span>{{ $category->name }}</span>
                     </a>
@@ -70,12 +69,68 @@
             .text-primary {
                 color: #007bff !important;
             }
+
+            .product-card {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                height: 100%;
+            }
+
+            .product-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            }
+
+            .card-img-top {
+                border-radius: 10px 10px 0 0;
+                height: 180px; /* Hauteur ajustée pour des images plus petites */
+                object-fit: contain; /* Ajuste l'image à l'intérieur du conteneur sans la couper */
+                padding: 10px; /* Un peu d'espace autour de l'image pour mieux respirer */
+            }
+
+            .product-title {
+                font-size: 1rem;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .card-text .text-danger {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+
+            .card-text del {
+                font-size: 1rem;
+                color: #999;
+            }
+
+            .badge {
+                font-size: 0.85rem;
+            }
+
+            .btn-primary, .btn-success {
+                width: 100%;
+                font-weight: bold;
+                margin-top: 10px;
+            }
+
+            /* Animations pour la vue grille/liste */
+            .product-item {
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            .product-list-view .product-item {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            .product-list-view .product-item.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
         </style>
-
-        <!-- Import FontAwesome -->
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-
 
         <!-- Zone de contenu principal -->
         <div class="col-md-9">
@@ -111,12 +166,12 @@
                 <!-- Liste de produits avec checkbox pour la sélection -->
                 <div id="products-container" class="row">
                     @foreach ($products as $product)
-                        <div class="col-md-6 col-lg-4 mb-4 product-item">
-                            <div class="card">
+                        <div class="col-md-6 col-lg-4 mb-4 product-item show">
+                            <div class="card product-card">
                                 <img src="{{ asset('storage/' . trim($product->imageUrls, '["]')) }}"
                                      class="card-img-top" alt="{{ $product->name }}">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $product->name }}</h5>
+                                    <h5 class="product-title">{{ $product->name }}</h5>
 
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="products[]"
@@ -136,12 +191,7 @@
                                         <span class="badge bg-warning text-dark">★★★★☆ ({{ $product->reviews_count }})</span>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <a href="{{ route('product', ['slug' => $product->slug]) }}"
-                                           class="btn btn-primary">Voir le produit</a>
-                                    </div>
-
-                                    <!-- Formulaire d'ajout au panier (POST) -->
+                                    <a href="{{ route('product', ['slug' => $product->slug]) }}" class="btn btn-primary">Voir le produit</a>
                                     <form action="{{ route('addToCart', ['productId' => $product->id]) }}" method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-success">Ajouter au panier</button>
@@ -178,6 +228,8 @@
     document.getElementById('grid-view-btn').addEventListener('click', function() {
         document.getElementById('products-container').classList.remove('product-list-view');
         document.querySelectorAll('.product-item').forEach(function(item) {
+            item.classList.add('show');
+            item.classList.remove('col-12');
             item.classList.add('col-md-6', 'col-lg-4');
         });
     });
@@ -185,8 +237,8 @@
     document.getElementById('list-view-btn').addEventListener('click', function() {
         document.getElementById('products-container').classList.add('product-list-view');
         document.querySelectorAll('.product-item').forEach(function(item) {
-            item.classList.remove('col-md-6', 'col-lg-4');
             item.classList.add('col-12');
+            item.classList.remove('col-md-6', 'col-lg-4');
         });
     });
 
