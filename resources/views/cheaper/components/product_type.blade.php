@@ -5,30 +5,37 @@
                 @php
                     $imageUrl = trim($product->imageUrls, '["]');
                 @endphp
-                <div class="col-md-3 col-6 p-1"> <!-- Using p-1 class for padding -->
+                <div class="col-md-3 col-6 p-1">
                     <div class="product-card">
-                        <a href="{{ route('product', ['slug' => $product->slug]) }}"> <!-- Lien vers la page produit -->
+                        <a href="{{ route('product', ['slug' => $product->slug]) }}">
                             <div class="product-image">
-                                <img src="{{ asset('storage/' . $imageUrl) }}" alt="{{ $product->name }}">
+                                <img src="{{ asset('storage/' . $imageUrl) }}"
+                                    alt="{{ __('messages.products.' . $product->id . '.name') }}">
                             </div>
                             <div class="product-details">
-                                <h5 class="product-title">{{ $product->name }}</h5>
-                                <p class="product-description">{{ $product->description }}</p>
-                                <p class="product-more-description">{{ $product->moreDescrciption }}</p>
+                                <h5 class="product-title">{{ __('messages.products.' . $product->id . '.name') }}</h5>
+                                <p class="product-description">
+                                    {{ __('messages.products.' . $product->id . '.description') }}</p>
+                                <p class="product-more-description">
+                                    {{ __('messages.products.' . $product->id . '.more_description') }}</p>
 
                                 <div class="product-price">
                                     <span class="price">€{{ number_format($product->soldePrice, 2, ',', ' ') }}</span>
                                     <del>€{{ number_format($product->regularPrice, 2, ',', ' ') }}</del>
-                                    <span class="on_sale">{{ 100 - round(($product->soldePrice / $product->regularPrice) * 100) }}% Off</span>
+                                    <span
+                                        class="on_sale">{{ 100 - round(($product->soldePrice / $product->regularPrice) * 100) }}%
+                                        {{ __('messages.off') }}</span>
                                 </div>
                             </div>
-                        </a> <!-- Fin du lien -->
+                        </a>
                     </div>
                 </div>
             @endforeach
         @endforeach
+
     </div>
 </div>
+
 
 <div id="bestSellers" class="product-category">
     <div class="row g-1"> <!-- Using g-1 class to reduce the gutters -->
@@ -37,30 +44,34 @@
                 @php
                     $imageUrl = trim($product->imageUrls, '["]');
                 @endphp
-                <div class="col-md-3 col-6 p-1"> <!-- Using p-1 class for padding -->
+                <div class="col-md-3 col-6 p-1">
                     <div class="product-card">
-                        <a href="{{ route('product', ['slug' => $product->slug]) }}"> <!-- Lien vers la page produit -->
+                        <a href="{{ route('product', ['slug' => $product->slug]) }}">
                             <div class="product-image">
-                                <img src="{{ asset('storage/' . $imageUrl) }}" alt="{{ $product->name }}">
+                                <img src="{{ asset('storage/' . $imageUrl) }}"
+                                    alt="{{ __('messages.products.' . $product->id . '.name') }}">
                             </div>
                             <div class="product-details">
-                                <h5 class="product-title">{{ $product->name }}</h5>
-                                <p class="product-description">{{ $product->description }}</p>
-                                <p class="product-more-description">{{ $product->moreDescrciption }}</p>
-                                {{-- <p class="product-additional-info">{{ $product->additionalInfos }} --}}
+                                <h5 class="product-title">{{ __('messages.products.' . $product->id . '.name') }}</h5>
+                                <p class="product-description">{{ __('messages.products.' . $product->id . '.description') }}</p>
+                                <p class="product-more-description">{{ __('messages.products.' . $product->id . '.more_description') }}</p>
+
                                 <div class="product-price">
                                     <span class="price">€{{ number_format($product->soldePrice, 2, ',', ' ') }}</span>
                                     <del>€{{ number_format($product->regularPrice, 2, ',', ' ') }}</del>
-                                    <span class="on_sale">{{ 100 - round(($product->soldePrice / $product->regularPrice) * 100) }}% Off</span>
+                                    <span class="on_sale">{{ 100 - round(($product->soldePrice / $product->regularPrice) * 100) }}%
+                                        {{ __('messages.off') }}</span>
                                 </div>
                             </div>
-                        </a> <!-- Fin du lien -->
+                        </a>
                     </div>
                 </div>
             @endforeach
         @endforeach
     </div>
 </div>
+
+
 
 <div id="featured" class="product-category">
     <div class="row g-1"> <!-- Using g-1 class to reduce the gutters -->
@@ -69,30 +80,34 @@
                 @php
                     $imageUrl = trim($product->imageUrls, '["]');
                 @endphp
-                <div class="col-md-3 col-6 p-1"> <!-- Using p-1 class for padding -->
+                <div class="col-md-3 col-6 p-1">
                     <div class="product-card">
-                        <a href="{{ route('product', ['slug' => $product->slug]) }}"> <!-- Lien vers la page produit -->
+                        <a href="{{ route('product', ['slug' => $product->slug]) }}">
                             <div class="product-image">
-                                <img src="{{ asset('storage/' . $imageUrl) }}" alt="{{ $product->name }}">
+                                <img src="{{ asset('storage/' . $imageUrl) }}"
+                                    alt="{{ __('messages.products.' . $product->id . '.name') }}">
                             </div>
                             <div class="product-details">
-                                <h5 class="product-title">{{ $product->name }}</h5>
-                                <p class="product-description">{{ $product->description }}</p>
-                                <p class="product-more-description">{{ $product->moreDescrciption }}</p>
+                                <h5 class="product-title">{{ __('messages.products.' . $product->id . '.name') }}</h5>
+                                <p class="product-description">{{ __('messages.products.' . $product->id . '.description') }}</p>
+                                <p class="product-more-description">{{ __('messages.products.' . $product->id . '.more_description') }}</p>
 
                                 <div class="product-price">
                                     <span class="price">€{{ number_format($product->soldePrice, 2, ',', ' ') }}</span>
                                     <del>€{{ number_format($product->regularPrice, 2, ',', ' ') }}</del>
-                                    <span class="on_sale">{{ 100 - round(($product->soldePrice / $product->regularPrice) * 100) }}% Off</span>
+                                    <span class="on_sale">{{ 100 - round(($product->soldePrice / $product->regularPrice) * 100) }}%
+                                        {{ __('messages.off') }}</span>
                                 </div>
                             </div>
-                        </a> <!-- Fin du lien -->
+                        </a>
                     </div>
                 </div>
             @endforeach
         @endforeach
     </div>
 </div>
+
+
 
 <div id="specialOffers" class="product-category">
     <div class="row g-1"> <!-- Using g-1 class to reduce the gutters -->
@@ -101,30 +116,34 @@
                 @php
                     $imageUrl = trim($product->imageUrls, '["]');
                 @endphp
-                <div class="col-md-3 col-6 p-1"> <!-- Using p-1 class for padding -->
+                <div class="col-md-3 col-6 p-1">
                     <div class="product-card">
-                        <a href="{{ route('product', ['slug' => $product->slug]) }}"> <!-- Lien vers la page produit -->
+                        <a href="{{ route('product', ['slug' => $product->slug]) }}">
                             <div class="product-image">
-                                <img src="{{ asset('storage/' . $imageUrl) }}" alt="{{ $product->name }}">
+                                <img src="{{ asset('storage/' . $imageUrl) }}"
+                                    alt="{{ __('messages.products.' . $product->id . '.name') }}">
                             </div>
                             <div class="product-details">
-                                <h5 class="product-title">{{ $product->name }}</h5>
-                                <p class="product-description">{{ $product->description }}</p>
-                                <p class="product-more-description">{{ $product->moreDescrciption }}</p>
+                                <h5 class="product-title">{{ __('messages.products.' . $product->id . '.name') }}</h5>
+                                <p class="product-description">{{ __('messages.products.' . $product->id . '.description') }}</p>
+                                <p class="product-more-description">{{ __('messages.products.' . $product->id . '.more_description') }}</p>
 
                                 <div class="product-price">
                                     <span class="price">€{{ number_format($product->soldePrice, 2, ',', ' ') }}</span>
                                     <del>€{{ number_format($product->regularPrice, 2, ',', ' ') }}</del>
-                                    <span class="on_sale">{{ 100 - round(($product->soldePrice / $product->regularPrice) * 100) }}% Off</span>
+                                    <span class="on_sale">{{ __('messages.products.' . $product->id . '.discount') }}
+                                        {{ __('messages.off') }}</span>
                                 </div>
                             </div>
-                        </a> <!-- Fin du lien -->
+                        </a>
                     </div>
                 </div>
             @endforeach
         @endforeach
     </div>
 </div>
+
+
 
 
 <style>
@@ -182,12 +201,12 @@
 
     .product-card {
         text-align: left;
-        border: 1px solid #ddd;
+        /* border: 1px solid #ddd; */
         /* Light border for better separation */
         padding: 10px;
         display: flex;
         flex-direction: column;
-        background-color: #fff;
+        background-color: #ffffff;
         /* Background color for a clean look */
         border-radius: 8px;
         /* Rounded corners */
@@ -202,19 +221,26 @@
 
     .product-image {
         width: 100%;
-        height: 300px;
+        height: 380px;
         /* Slightly reduced height for the images */
         overflow: hidden;
         /* Hide any overflow */
         border-radius: 8px 8px 0 0;
         /* Rounded corners on the top of the card */
+        background-color: #ffffff;
+        /* Une couleur de fond pour un contraste propre */
+
     }
 
     .product-image img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        /* object-fit: cover; */
         /* Cover image for a cleaner appearance */
+        object-fit: contain;
+        /* Pour s'assurer que l'image reste contenue sans être coupée */
+        padding: 10px;
+        /* Espace autour de l'image pour un look plus épuré */
     }
 
     .product-details {

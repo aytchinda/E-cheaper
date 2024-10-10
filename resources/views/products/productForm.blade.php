@@ -41,7 +41,10 @@
                 <select class="form-control" name="categories[]" id="categories" multiple>
                     <option disabled>Select product category</option>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" @if (in_array($category->id, old('categories', isset($product) ? $product->categories->pluck('id')->toArray() : []))) selected @endif>
+                        <option value="{{ $category->id }}"
+                            @if (in_array($category->id, old('categories', isset($product) ? $product->categories->pluck('id')->toArray() : [])))
+                                selected
+                            @endif>
                             {{ $category->name }}
                         </option>
                     @endforeach
@@ -53,6 +56,7 @@
                     </div>
                 @enderror
             </div>
+
 
 
             <div class="mb-3">

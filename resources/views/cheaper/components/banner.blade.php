@@ -1,30 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>{{ __('messages.home') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .carousel-item {
-            max-height: 400px; /* Ajustez cette valeur selon vos besoins */
-            background-size: contain; /* Use 'cover' to fill the area while maintaining aspect ratio */
+            max-height: 400px;
+            background-size: contain;
             background-repeat: repeat;
             background-position: center;
         }
         .carousel-item .banner_slide_content {
-            background: rgba(0, 0, 0, 0.3); /* Augmenter l'opacité pour plus de contraste */
+            background: rgba(0, 0, 0, 0.3);
             padding: 20px;
             border-radius: 5px;
-            color: white; /* Assurez-vous que le texte est lisible sur un fond sombre */
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.8); /* Ajout d'une ombre pour améliorer la lisibilité */
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.8);
         }
         .carousel-item h5 {
-            font-size: 2em; /* Augmenter la taille de la police pour le titre */
-            font-weight: bold; /* Rendre le texte plus gras pour améliorer la lisibilité */
+            font-size: 2em;
+            font-weight: bold;
         }
         .carousel-item p {
-            font-size: 1.2em; /* Augmenter la taille de la police pour le texte */
+            font-size: 1.2em;
         }
     </style>
 </head>
@@ -37,9 +37,9 @@
                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}"
                              style="background-image: url('{{ Storage::url($banner->imageUrl) }}');">
                             <div class="banner_slide_content">
-                                <h5>{{ $banner->title }}</h5>
-                                <p class="fw-bold fst-italic">{{ $banner->description }}</p>
-                                <a href="{{ route('shop') }}" class="btn btn-primary">{{ $banner->buttonText }}</a>
+                                <h5>{{ __('messages.banner.title_' . $banner->id) }}</h5>
+                                <p class="fw-bold fst-italic">{{ __('messages.banner.description_' . $banner->id) }}</p>
+                                <a href="{{ $banner->buttonLink }}" class="btn btn-primary">{{ __('messages.banner.buttonText_' . $banner->id) }}</a>
                             </div>
                         </div>
                     @endforeach

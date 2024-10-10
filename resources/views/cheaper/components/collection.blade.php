@@ -5,18 +5,21 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <img src="{{ asset('storage/' . $collection->imageUrl) }}" class="card-img-top"
-                            alt="{{ $collection->title }}">
-                        <h5 class="card-title" style="line-height: 1.0; font-size: 1.1rem; margin-bottom: 5px; color: #fff;">{{ $collection->title }}</h5>
+                            alt="{{ __('messages.shop_collection.title_' . $collection->id) }}">
+                        <h5 class="card-title" style="line-height: 1.0; font-size: 1.1rem; margin-bottom: 5px; color: #fff;">
+                            {{ __('messages.shop_collection.title_' . $collection->id) }}</h5>
                         <p class="card-text" style="font-size: 18px; font-weight: bold; line-height: 1.0; margin-bottom: 5px; color: #fff;">
-                            {{ $collection->description }}</p>
-                        <a class="single_btn_link" href="{{ route('shop') }}"
-                            style="background-color: #4CAF50; color: white; padding: 5px 10px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; border-radius: 5px; margin-top: 5px;">{{ $collection->buttonText }}</a>
+                            {{ __('messages.shop_collection.description_' . $collection->id) }}</p>
+                        <a class="single_btn_link" href="{{ $collection->buttonLink }}"
+                            style="background-color: #4CAF50; color: white; padding: 5px 10px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; border-radius: 5px; margin-top: 5px;">
+                            {{ __('messages.shop_collection.buttonText_' . $collection->id) }}</a>
                     </div>
                 </div>
             </div>
         @endforeach
     </div>
 </div>
+
 
 <style>
     .container {
