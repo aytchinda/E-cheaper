@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Produits</title>
+    <style>
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            display: inline-block;
+            text-align: center;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Liste des Produits</h1>
+
+<!-- Conteneur où les produits seront affichés -->
+<div id="products-container"></div>
+
+<script>
+// Étape 2: Appel API pour obtenir les produits
+fetch('http://localhost:8000/api/products', {
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer 1|w1pgFcaoe9ppvIn4xMVvGPC3VV2qVbD6GAymNDdE802147cf', // Remplacez avec votre token
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+})
+.then(response => response.json())
+.then(data => {
+    const container = document.getElementById('products-container');
+
+    // Étape 3 : Afficher les produits dans la page
+    data.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product');
+
+        productElement.innerHTML = `
+        <img src="http://localhost:8000/storage/${product.imageUrls.replace(/[\[\]"]/g, '')}" alt="${product.name}">
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        <p>Prix: €${product.soldePrice}</p>
+        <p><del>€${product.regularPrice}</del></p>
+    `;
+
+        container.appendChild(productElement);
+    });
+})
+.catch(error => console.error('Erreur lors de la récupération des produits:', error));
+</script>
+
+</body>
+</html>
