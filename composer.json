@@ -8,8 +8,9 @@
         "php": "^8.1",
         "espero-soft/artisan": "dev-main",
         "guzzlehttp/guzzle": "^7.2",
+        "knuckleswtf/scribe": "^4.37",
         "laravel/framework": "^10.0",
-        "laravel/sanctum": "^3.2",
+        "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "stichoza/google-translate-php": "^5.2",
         "stripe/stripe-php": "^15.9"

@@ -1,0 +1,364 @@
+name: Endpoints
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/user
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"id":25,"name":"Test","email":"test@gmail.com","email_verified_at":null,"created_at":"2024-09-16T18:17:25.000000Z","updated_at":"2024-09-16T20:22:47.000000Z"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '56'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|w1pgFcaoe9ppvIn4xMVvGPC3VV2qVbD6GAymNDdE802147cf'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/products
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '[{"id":1,"category_id":1,"name":"Ensemble Gants et Bonnet","slug":"ensemble-gants-et-bonnet","description":"couvrez vous","moreDescrciption":"Restez au chaud \u00e0 prix tres abordables ,","additionalInfos":"<p>nous pensons aux personnes en situration pr\u00e9caire&nbsp;<\/p>","stock":25,"soldePrice":"3.99","regularPrice":"15.99","imageUrls":"[\"images\\\/66e87a590c157_istockphoto-1578054137-612x612.jpg\"]","brand":"Zora","isAvailable":true,"isBestSeller":true,"isNewArrival":false,"isFeatured":false,"isSpecialOffer":false,"created_at":"2024-09-16T18:35:05.000000Z","updated_at":"2024-09-16T18:35:05.000000Z"},{"id":2,"category_id":3,"name":"Ensemble Top et jupe","slug":"ensemble-top-et-jupe","description":"Magnifique ensemble classe et styl\u00e9","moreDescrciption":"Fashion style","additionalInfos":"<p>top<\/p>","stock":15,"soldePrice":"6.99","regularPrice":"19.99","imageUrls":"[\"images\\\/66e87aeae9c81_1.webp\"]","brand":"HetM","isAvailable":false,"isBestSeller":false,"isNewArrival":true,"isFeatured":true,"isSpecialOffer":false,"created_at":"2024-09-16T18:37:30.000000Z","updated_at":"2024-09-16T18:37:30.000000Z"},{"id":3,"category_id":3,"name":"Robe de soiree","slug":"robe-de-soiree","description":"Robe \u00e9l\u00e9gante pour soir\u00e9e","moreDescrciption":"magnifique","additionalInfos":"<p>Robe de soiree magnifique&nbsp;<\/p>","stock":15,"soldePrice":"2.95","regularPrice":"17.99","imageUrls":"[\"images\\\/66e87bf69c3c1_5.webp\"]","brand":"EPFC","isAvailable":true,"isBestSeller":false,"isNewArrival":true,"isFeatured":true,"isSpecialOffer":true,"created_at":"2024-09-16T18:41:58.000000Z","updated_at":"2024-09-16T18:41:58.000000Z"},{"id":4,"category_id":2,"name":"Chemise Blanc et Noir","slug":"chemise-blanc-et-noir","description":"Chemise pour Hommes","moreDescrciption":"soyez \u00e9legant \u00e0 moindre cout","additionalInfos":"<p>\u2026\u2026..<\/p>","stock":15,"soldePrice":"4.55","regularPrice":"25.76","imageUrls":"[\"images\\\/66e87c6491d80_istockphoto-165685498-612x612.jpg\"]","brand":"Zarra","isAvailable":false,"isBestSeller":true,"isNewArrival":true,"isFeatured":false,"isSpecialOffer":true,"created_at":"2024-09-16T18:43:48.000000Z","updated_at":"2024-09-16T18:43:48.000000Z"},{"id":5,"category_id":2,"name":"Ensemble Costume","slug":"ensemble-costume","description":"Costme pour homme","moreDescrciption":"joli","additionalInfos":"<p>\u2026<\/p>","stock":3,"soldePrice":"9.99","regularPrice":"35.99","imageUrls":"[\"images\\\/66e87cb8df31d_istockphoto-1430978895-612x612.jpg\"]","brand":"Primerrrk","isAvailable":false,"isBestSeller":true,"isNewArrival":true,"isFeatured":true,"isSpecialOffer":false,"created_at":"2024-09-16T18:45:12.000000Z","updated_at":"2024-09-16T18:45:12.000000Z"},{"id":6,"category_id":3,"name":"Jupe simili cuir","slug":"jupe-simili-cuir","description":"Affirmez votre style","moreDescrciption":"Jupe simili cuir","additionalInfos":"<p>\u2026<\/p>","stock":15,"soldePrice":"5.76","regularPrice":"9.99","imageUrls":"[\"images\\\/66e87d0d7a1d1_1.webp\"]","brand":"Zora","isAvailable":true,"isBestSeller":true,"isNewArrival":true,"isFeatured":true,"isSpecialOffer":true,"created_at":"2024-09-16T18:46:37.000000Z","updated_at":"2024-09-16T18:46:37.000000Z"},{"id":7,"category_id":3,"name":"Bottines","slug":"bottines","description":"Botine d''hiver","moreDescrciption":"Bottes","additionalInfos":"<p>\u2026<\/p>","stock":15,"soldePrice":"7.50","regularPrice":"17.70","imageUrls":"[\"images\\\/66e87d82665af_istockphoto-1191174327-612x612.jpg\"]","brand":"Diessel","isAvailable":false,"isBestSeller":true,"isNewArrival":true,"isFeatured":false,"isSpecialOffer":true,"created_at":"2024-09-16T18:48:34.000000Z","updated_at":"2024-09-16T18:48:34.000000Z"},{"id":8,"category_id":5,"name":"Chaussures de courses Unisex","slug":"chaussures-de-courses-unisex","description":"tres l\u00e9ger","moreDescrciption":"chaussures de courses","additionalInfos":"<p>\u2026<\/p>","stock":3,"soldePrice":"11.50","regularPrice":"24.99","imageUrls":"[\"images\\\/66e87e113b266_istockphoto-1453810805-612x612.jpg\"]","brand":"Abibas","isAvailable":true,"isBestSeller":true,"isNewArrival":false,"isFeatured":false,"isSpecialOffer":true,"created_at":"2024-09-16T18:50:57.000000Z","updated_at":"2024-09-16T18:50:57.000000Z"},{"id":9,"category_id":4,"name":"Planche \u00e0 d\u00e9couper","slug":"planche-a-decouper","description":"en Bois","moreDescrciption":"cuisine","additionalInfos":"<p>\u2026<\/p>","stock":29,"soldePrice":"1.50","regularPrice":"5.99","imageUrls":"[\"images\\\/66e87e93b729b_istockphoto-2160970399-612x612.jpg\"]","brand":"Ikoueya","isAvailable":true,"isBestSeller":false,"isNewArrival":false,"isFeatured":true,"isSpecialOffer":true,"created_at":"2024-09-16T18:53:07.000000Z","updated_at":"2024-09-16T18:53:07.000000Z"},{"id":10,"category_id":4,"name":"Set de Spatules","slug":"set-de-spatules","description":"louches et spatules","moreDescrciption":"...","additionalInfos":"<p>\u2026<\/p>","stock":2,"soldePrice":"3.29","regularPrice":"6.88","imageUrls":"[\"images\\\/66e87edd49f15_istockphoto-1676176264-612x612.jpg\"]","brand":"Ikoueya","isAvailable":true,"isBestSeller":true,"isNewArrival":true,"isFeatured":true,"isSpecialOffer":true,"created_at":"2024-09-16T18:54:21.000000Z","updated_at":"2024-09-16T18:54:21.000000Z"},{"id":11,"category_id":3,"name":"Short de sport","slug":"short-de-sport","description":"sportivement","moreDescrciption":"bien","additionalInfos":"<p>tres bien&nbsp;<\/p>","stock":3,"soldePrice":"2.50","regularPrice":"5.99","imageUrls":"[\"images\\\/66e87f2249347_6.png\"]","brand":"Zarra","isAvailable":true,"isBestSeller":true,"isNewArrival":true,"isFeatured":true,"isSpecialOffer":true,"created_at":"2024-09-16T18:55:30.000000Z","updated_at":"2024-09-16T18:55:30.000000Z"},{"id":14,"category_id":6,"name":"SmartPhone","slug":"smartphone","description":"Iphone 11","moreDescrciption":"128g","additionalInfos":"<p>Camera frontale 13MP , Camera arriere 20MP<\/p>","stock":2,"soldePrice":"190.55","regularPrice":"399.99","imageUrls":"[\"images\\\/6706111ab88c8_iphone11.jpeg\"]","brand":"Apple","isAvailable":true,"isBestSeller":false,"isNewArrival":true,"isFeatured":false,"isSpecialOffer":false,"created_at":"2024-10-09T05:14:02.000000Z","updated_at":"2024-10-09T05:49:57.000000Z"},{"id":15,"category_id":6,"name":"SmartPhone","slug":"smartphone","description":"Iphone12","moreDescrciption":"64g","additionalInfos":"<p>Camera frontale 13MP, Camera arriere 25MP<\/p>","stock":3,"soldePrice":"220.99","regularPrice":"654.77","imageUrls":"[\"images\\\/670613c77c394_iphone12.jpeg\"]","brand":"Apple","isAvailable":true,"isBestSeller":false,"isNewArrival":true,"isFeatured":false,"isSpecialOffer":false,"created_at":"2024-10-09T05:25:27.000000Z","updated_at":"2024-10-09T05:45:07.000000Z"},{"id":16,"category_id":6,"name":"Pc portable","slug":"pc-portable","description":"Dell Latitude occasion","moreDescrciption":"Pc portable reconditionn\u00e9 256 giga de m\u00e9moire et RAM 8giga","additionalInfos":"<p>redonnez une nouvelles vie a ce pc&nbsp;<\/p>","stock":1,"soldePrice":"99.99","regularPrice":"299.99","imageUrls":"[\"images\\\/6706ad617913d_dellLatitude34.jpeg\"]","brand":"Dell","isAvailable":true,"isBestSeller":false,"isNewArrival":false,"isFeatured":false,"isSpecialOffer":false,"created_at":"2024-10-09T16:20:49.000000Z","updated_at":"2024-10-09T16:20:49.000000Z"},{"id":17,"category_id":6,"name":"Pc Portable","slug":"pc-portable","description":"Asus New generation","moreDescrciption":"256 Gigas de m\u00e9moir et 8 Giga de RAM","additionalInfos":"<p>offre de deuxi\u00e8me main&nbsp;<\/p>","stock":1,"soldePrice":"99.99","regularPrice":"320.99","imageUrls":"[\"images\\\/6706adf151b1f_asus.jpeg\"]","brand":"Asus","isAvailable":true,"isBestSeller":false,"isNewArrival":false,"isFeatured":false,"isSpecialOffer":false,"created_at":"2024-10-09T16:23:13.000000Z","updated_at":"2024-10-09T16:23:13.000000Z"},{"id":18,"category_id":7,"name":"Pc Portable","slug":"pc-portable","description":"Thinkpad Lenovo T480","moreDescrciption":"120Giga de memoire , 8 Giga de ram","additionalInfos":"<p>vos articles en seconde main&nbsp;<\/p>","stock":2,"soldePrice":"79.99","regularPrice":"278.96","imageUrls":"[\"images\\\/6706bee33fd86_lenovothinkpadT480.jpeg\"]","brand":"Lenovo","isAvailable":true,"isBestSeller":false,"isNewArrival":true,"isFeatured":false,"isSpecialOffer":false,"created_at":"2024-10-09T17:35:31.000000Z","updated_at":"2024-10-09T17:35:31.000000Z"},{"id":19,"category_id":7,"name":"Rame de papier","slug":"rame-de-papier","description":"format A4","moreDescrciption":"Rames de papier format A4","additionalInfos":"<p>a moindre cout<\/p>","stock":12,"soldePrice":"2.99","regularPrice":"4.55","imageUrls":"[\"images\\\/6706c79b633e8_rame paierA4.jpeg\"]","brand":"A4","isAvailable":true,"isBestSeller":false,"isNewArrival":true,"isFeatured":false,"isSpecialOffer":false,"created_at":"2024-10-09T18:12:43.000000Z","updated_at":"2024-10-09T18:12:43.000000Z"},{"id":20,"category_id":7,"name":"Set style , Crayons","slug":"set-style-crayons","description":"Stylos  Bic , crayon et Gommes","moreDescrciption":"indispensables pour les notes","additionalInfos":"<p>notes&nbsp;<\/p>","stock":5,"soldePrice":"0.99","regularPrice":"2.50","imageUrls":"[\"images\\\/6706c7f1e3ba4_set stylo.jpeg\"]","brand":"Bic","isAvailable":true,"isBestSeller":false,"isNewArrival":true,"isFeatured":false,"isSpecialOffer":false,"created_at":"2024-10-09T18:14:09.000000Z","updated_at":"2024-10-09T18:14:09.000000Z"},{"id":21,"category_id":7,"name":"Sac Pc portable","slug":"sac-pc-portable","description":"Sac \u00e0 dos pour Pc portable","moreDescrciption":"transpoter votre pc portable en toute s\u00e9curit\u00e9","additionalInfos":"<p>sac \u00e0 dos&nbsp;<\/p>","stock":3,"soldePrice":"12.99","regularPrice":"25.00","imageUrls":"[\"images\\\/6706c8761e825_sac pc portable.jpeg\"]","brand":"badday","isAvailable":true,"isBestSeller":false,"isNewArrival":true,"isFeatured":false,"isSpecialOffer":false,"created_at":"2024-10-09T18:16:22.000000Z","updated_at":"2024-10-09T18:16:22.000000Z"},{"id":22,"category_id":7,"name":"Gourde \u00e0 eau","slug":"gourde-a-eau","description":"contenant \u00e0 eau","moreDescrciption":"Contenant","additionalInfos":"<p>pour etudiant&nbsp;<\/p>","stock":2,"soldePrice":"9.99","regularPrice":"19.99","imageUrls":"[\"images\\\/6706c9d042e71_gourde eau.jpeg\"]","brand":"Primark","isAvailable":true,"isBestSeller":false,"isNewArrival":true,"isFeatured":false,"isSpecialOffer":false,"created_at":"2024-10-09T18:19:43.000000Z","updated_at":"2024-10-09T18:22:08.000000Z"},{"id":23,"category_id":5,"name":"Toge Etudiants","slug":"toge-etudiants","description":"Pour votre prochaine remise de diplome","moreDescrciption":"f\u00e9licitations jeunes diplom\u00e9s","additionalInfos":"<p>Proficiat , Toge mixte pour remise de diplome&nbsp;<\/p>","stock":4,"soldePrice":"5.99","regularPrice":"25.99","imageUrls":"[\"images\\\/6706ce69ad2cf_toge etudiant.jpeg\"]","brand":"Epfc","isAvailable":true,"isBestSeller":true,"isNewArrival":true,"isFeatured":true,"isSpecialOffer":true,"created_at":"2024-10-09T18:41:45.000000Z","updated_at":"2024-10-09T18:41:45.000000Z"}]'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '55'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|w1pgFcaoe9ppvIn4xMVvGPC3VV2qVbD6GAymNDdE802147cf'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/products/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the product.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"id":1,"category_id":1,"name":"Ensemble Gants et Bonnet","slug":"ensemble-gants-et-bonnet","description":"couvrez vous","moreDescrciption":"Restez au chaud \u00e0 prix tres abordables ,","additionalInfos":"<p>nous pensons aux personnes en situration pr\u00e9caire&nbsp;<\/p>","stock":25,"soldePrice":"3.99","regularPrice":"15.99","imageUrls":"[\"images\\\/66e87a590c157_istockphoto-1578054137-612x612.jpg\"]","brand":"Zora","isAvailable":true,"isBestSeller":true,"isNewArrival":false,"isFeatured":false,"isSpecialOffer":false,"created_at":"2024-09-16T18:35:05.000000Z","updated_at":"2024-09-16T18:35:05.000000Z"}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          x-ratelimit-limit: '60'
+          x-ratelimit-remaining: '54'
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|w1pgFcaoe9ppvIn4xMVvGPC3VV2qVbD6GAymNDdE802147cf'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/products
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: hhzdf
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: true
+        example: 'Et delectus ea non quia nulla est ut.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      price:
+        name: price
+        description: ''
+        required: true
+        example: 0.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      name: hhzdf
+      description: 'Et delectus ea non quia nulla est ut.'
+      price: 0.0
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|w1pgFcaoe9ppvIn4xMVvGPC3VV2qVbD6GAymNDdE802147cf'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/products/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the product.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: ptdtuxmjhbt
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      description:
+        name: description
+        description: ''
+        required: false
+        example: 'Reiciendis aspernatur nobis et adipisci.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      price:
+        name: price
+        description: ''
+        required: false
+        example: 1035847.0
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      name: ptdtuxmjhbt
+      description: 'Reiciendis aspernatur nobis et adipisci.'
+      price: 1035847.0
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|w1pgFcaoe9ppvIn4xMVvGPC3VV2qVbD6GAymNDdE802147cf'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/products/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the product.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|w1pgFcaoe9ppvIn4xMVvGPC3VV2qVbD6GAymNDdE802147cf'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/generate-token
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 1|w1pgFcaoe9ppvIn4xMVvGPC3VV2qVbD6GAymNDdE802147cf'
+    controller: null
+    method: null
+    route: null
+    custom: []
