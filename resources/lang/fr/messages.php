@@ -1,7 +1,67 @@
 <?php
 return [
 
+    'order_number' => 'Numéro de commande',
+
+
+    'order_success' => 'Commande réussie !',
+    'order_confirmation_message' => 'Merci pour votre achat. Votre commande a bien été confirmée.',
+    'total_to_pay' => 'Total à Payer',
+    'order_details' => 'Détails de la commande',
+    'subtotal' => 'Sous-total (HT)',
+    'tax' => 'Taxe (:percentage%)',
+    'shipping_fee' => 'Frais de livraison',
+    'total_order' => 'Total de la commande (TTC)',
+    'back_to_shop' => 'Retour à la boutique',
+    'confirm_and_pay' => 'Confirmer et Payer',
+    'close' => 'Fermer',
+
+    'order_validation' => 'Validation de la commande',
+    'your_products' => 'Vos Produits',
+    'product' => 'Produit',
+    'product_name' => 'Nom du produit',
+    'price' => 'Prix',
+    'quantity' => 'Quantité',
+    'total' => 'Total',
+    'billing_details' => 'Détails de facturation',
+    'different_shipping_address' => 'Adresse de livraison différente',
+    'select_billing_address' => 'Sélectionnez l\'adresse de facturation',
+    'order_summary' => 'Résumé de la commande',
+    'subtotal' => 'Sous Total',
+    'shipping_carrier' => 'Transporteur',
+    'shipping_fee' => 'Frais de livraison',
+    'total_to_pay' => 'Total à Payer',
+    'secure_payment' => 'Paiement sécurisé',
+
+
+    'cart' => 'Votre Panier',
+    'product' => 'Produit',
+    'product_name' => 'Nom du produit',
+    'price' => 'Prix',
+    'quantity' => 'Quantité',
+    'total' => 'Total',
+    'action' => 'Action',
+    'carrier' => 'Transporteur',
+    'subtotal' => 'Sous Total du Panier',
+    'shipping' => 'Frais de livraison',
+    'total_to_pay' => 'Total à Payer',
+    'proceed_to_checkout' => 'Passer à la caisse',
+    'remove_item' => 'Supprimer l\'article',
+
+
     'off' => 'de réduction',
+
+    'add_to_cart' => 'Ajouter au panier',
+    'pay_now' => 'Payer maintenant',
+    'sku' => 'Référence',
+    'category' => 'Catégorie',
+    'tags' => 'Étiquettes',
+    'size' => 'Taille',
+    'color' => 'Couleur',
+    'quantity' => 'Quantité',
+    'red' => 'Rouge',
+    'blue' => 'Bleu',
+    'green' => 'Vert',
 
     //BAnner
     'banner' => [
@@ -45,7 +105,7 @@ return [
             'discount' => '75%',
         ],
 
-        
+
             18 => [
                 'name' => 'Pc Portable',
                 'description' => 'Thinkpad Lenovo T480, 120Giga de mémoire, 8 Giga de RAM',

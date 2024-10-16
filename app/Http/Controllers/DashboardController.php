@@ -124,5 +124,21 @@ class DashboardController extends Controller
 
 
 
+    public function markNotificationAsRead($notificationId)
+    {
+        // Récupérer la notification de l'utilisateur authentifié
+        $notification = auth()->user()->notifications()->find($notificationId);
+
+        // Vérifier si la notification existe et marquer comme lue
+        if ($notification) {
+            $notification->markAsRead();
+        }
+
+        // Rediriger vers la page précédente (dashboard)
+        return redirect()->back()->with('success', 'Notification marquée comme lue.');
+    }
+
+
+
 
 }

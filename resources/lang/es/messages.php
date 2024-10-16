@@ -1,6 +1,66 @@
 <?php
 return [
 
+    'order_number' => 'Número de pedido',
+
+
+    'order_success' => '¡Pedido Exitoso!',
+    'order_confirmation_message' => 'Gracias por su compra. Su pedido ha sido confirmado con éxito.',
+    'total_to_pay' => 'Total a Pagar',
+    'order_details' => 'Detalles del pedido',
+    'subtotal' => 'Subtotal (Sin IVA)',
+    'tax' => 'Impuesto (:percentage%)',
+    'shipping_fee' => 'Costo de envío',
+    'total_order' => 'Total del pedido (Incl. IVA)',
+    'back_to_shop' => 'Volver a la tienda',
+
+    'confirm_and_pay' => 'Confirmar y Pagar',
+    'close' => 'Cerrar',
+
+
+    'order_validation' => 'Validación del pedido',
+    'your_products' => 'Sus Productos',
+    'product' => 'Producto',
+    'product_name' => 'Nombre del producto',
+    'price' => 'Precio',
+    'quantity' => 'Cantidad',
+    'total' => 'Total',
+    'billing_details' => 'Detalles de facturación',
+    'different_shipping_address' => 'Dirección de envío diferente',
+    'select_billing_address' => 'Seleccione la dirección de facturación',
+    'order_summary' => 'Resumen del pedido',
+    'subtotal' => 'Subtotal',
+    'shipping_carrier' => 'Transportista',
+    'shipping_fee' => 'Costo de envío',
+    'total_to_pay' => 'Total a Pagar',
+    'secure_payment' => 'Pago seguro',
+
+    'add_to_cart' => 'Añadir al carrito',
+    'pay_now' => 'Pagar ahora',
+    'sku' => 'Referencia',
+    'category' => 'Categoría',
+    'tags' => 'Etiquetas',
+    'size' => 'Talla',
+    'color' => 'Color',
+    'quantity' => 'Cantidad',
+    'red' => 'Rojo',
+    'blue' => 'Azul',
+    'green' => 'Verde',
+
+    'cart' => 'Su Carrito',
+    'product' => 'Producto',
+    'product_name' => 'Nombre del producto',
+    'price' => 'Precio',
+    'quantity' => 'Cantidad',
+    'total' => 'Total',
+    'action' => 'Acción',
+    'carrier' => 'Transportista',
+    'subtotal' => 'Subtotal del Carrito',
+    'shipping' => 'Envío',
+    'total_to_pay' => 'Total a Pagar',
+    'proceed_to_checkout' => 'Proceder al pago',
+    'remove_item' => 'Eliminar artículo',
+
     //BANNER
     'banner' => [
         'title_2' => 'Los precios más bajos',
@@ -188,7 +248,7 @@ return [
             'old_price' => '',
             'discount' => '',
         ],
-       
+
             18 => [
                 'name' => 'Portátil',
                 'description' => 'Thinkpad Lenovo T480, 120GB de memoria, 8GB de RAM',

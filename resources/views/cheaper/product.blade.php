@@ -184,25 +184,25 @@
         <!-- Images du produit -->
         <div class="product-images">
             <div class="main-image">
-                <img src="{{ asset('storage/' . trim($product->imageUrls, '["]')) }}" alt="{{ $product->name }}">
+                <img src="{{ asset('storage/' . trim($product->imageUrls, '["]')) }}" alt="{{ __('messages.products.' . $product->id . '.name') }}">
             </div>
             <div class="thumbnail-images">
                 @foreach (json_decode($product->imageUrls) as $imageUrl)
-                    <img src="{{ asset('storage/' . $imageUrl) }}" alt="Thumbnail">
+                    <img src="{{ asset('storage/' . $imageUrl) }}" alt="{{ __('messages.products.' . $product->id . '.name') }}">
                 @endforeach
             </div>
         </div>
 
         <!-- Détails du produit -->
         <div class="product-details">
-            <h1 class="product-title">{{ $product->name }}</h1>
+            <h1 class="product-title">{{ __('messages.products.' . $product->id . '.name') }}</h1>
             <p class="product-price">€{{ number_format($product->soldePrice, 2, ',', ' ') }}</p>
-            <p class="product-description">{{ $product->description }}</p>
-            <p class="product-more-description">{{ $product->moreDescrciption }}</p>
+            <p class="product-description">{{ __('messages.products.' . $product->id . '.description') }}</p>
+            <p class="product-more-description">{{ __('messages.products.' . $product->id . '.more_description') }}</p>
 
             <!-- Sélection d'options -->
             <div class="product-options">
-                <label for="size">Size:</label>
+                <label for="size">{{ __('messages.size') }}:</label>
                 <select id="size" name="size">
                     <option value="XS">XS</option>
                     <option value="S">S</option>
@@ -211,15 +211,15 @@
                     <option value="XL">XL</option>
                 </select>
 
-                <label for="color">Color:</label>
-                <input type="radio" id="color1" name="color" value="red"> Red
-                <input type="radio" id="color2" name="color" value="blue"> Blue
-                <input type="radio" id="color3" name="color" value="green"> Green
+                <label for="color">{{ __('messages.color') }}:</label>
+                <input type="radio" id="color1" name="color" value="red"> {{ __('messages.red') }}
+                <input type="radio" id="color2" name="color" value="blue"> {{ __('messages.blue') }}
+                <input type="radio" id="color3" name="color" value="green"> {{ __('messages.green') }}
             </div>
 
             <!-- Sélecteur de quantité -->
             <div class="quantity-selector">
-                <label for="quantity">Quantity:</label>
+                <label for="quantity">{{ __('messages.quantity') }}:</label>
                 <input type="number" id="quantity" name="quantity" min="1" value="1">
             </div>
 
@@ -227,29 +227,21 @@
             <div class="product-actions">
                 <form action="{{ route('addToCart', ['productId' => $product->id]) }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-success">Add to Cart</button>
-                    <button type="button">Pay Now</button>
+                    <button type="submit" class="btn btn-success">{{ __('messages.add_to_cart') }}</button>
+                    <button type="button">{{ __('messages.pay_now') }}</button>
                 </form>
             </div>
 
             <!-- Informations supplémentaires -->
             <div class="product-sku">
-                SKU: <span>{{ $product->sku }}</span>
+                {{ __('messages.sku') }}: <span>{{ $product->sku }}</span>
             </div>
             <div class="product-category">
-                Category: <span>{{ $product->category }}</span>
+                {{ __('messages.category') }}: <span>{{ $product->category }}</span>
             </div>
             <div class="product-tags">
-                Tags: <span>{{ $product->tags }}</span>
+                {{ __('messages.tags') }}: <span>{{ $product->tags }}</span>
             </div>
-
-            <!-- Icônes de réseaux sociaux -->
-            {{-- <div class="social-icons">
-                <a href="#"><i class="fa fa-facebook"></i></a>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-                <a href="#"><i class="fa fa-instagram"></i></a>
-                <a href="#"><i class="fa fa-pinterest"></i></a>
-            </div> --}}
         </div>
     </div>
 </div>

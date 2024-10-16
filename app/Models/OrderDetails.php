@@ -19,6 +19,11 @@ class OrderDetails extends Model
 
 	}
 
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id'); // 'product_id' doit être la clé étrangère
+    }
 
 	protected $fillable = ['product_name', 'product_description', 'soldePrice', 'regularPrice', 'quantity', 'taxe', 'sub_total_ht', 'sub_total_ttc', 'order'];
 }
+

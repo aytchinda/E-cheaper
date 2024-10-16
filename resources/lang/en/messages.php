@@ -1,6 +1,65 @@
 <?php
 return [
 
+    'order_number' => 'Order Number',
+
+    'order_success' => 'Order Successful!',
+    'order_confirmation_message' => 'Thank you for your purchase. Your order has been successfully confirmed.',
+    'total_to_pay' => 'Total to Pay',
+    'order_details' => 'Order Details',
+    'subtotal' => 'Subtotal (Excl. Tax)',
+    'tax' => 'Tax (:percentage%)',
+    'shipping_fee' => 'Shipping Fee',
+    'total_order' => 'Total Order (Incl. Tax)',
+    'back_to_shop' => 'Back to Shop',
+
+
+    'close' => 'Close',
+
+    'confirm_and_pay' => 'Confirm and Pay',
+    'order_validation' => 'Order Validation',
+    'your_products' => 'Your Products',
+    'product' => 'Product',
+    'product_name' => 'Product Name',
+    'price' => 'Price',
+    'quantity' => 'Quantity',
+    'total' => 'Total',
+    'billing_details' => 'Billing Details',
+    'different_shipping_address' => 'Different shipping address',
+    'select_billing_address' => 'Select billing address',
+    'order_summary' => 'Order Summary',
+    'subtotal' => 'Subtotal',
+    'shipping_carrier' => 'Carrier',
+    'shipping_fee' => 'Shipping fee',
+    'total_to_pay' => 'Total to Pay',
+    'secure_payment' => 'Secure Payment',
+
+    'cart' => 'Your Cart',
+    'product' => 'Product',
+    'product_name' => 'Product Name',
+    'price' => 'Price',
+    'quantity' => 'Quantity',
+    'total' => 'Total',
+    'action' => 'Action',
+    'carrier' => 'Carrier',
+    'subtotal' => 'Cart Subtotal',
+    'shipping' => 'Shipping',
+    'total_to_pay' => 'Total to Pay',
+    'proceed_to_checkout' => 'Proceed to Checkout',
+    'remove_item' => 'Remove Item',
+
+    'add_to_cart' => 'Add to Cart',
+    'pay_now' => 'Pay Now',
+    'sku' => 'SKU',
+    'category' => 'Category',
+    'tags' => 'Tags',
+    'size' => 'Size',
+    'color' => 'Color',
+    'quantity' => 'Quantity',
+    'red' => 'Red',
+    'blue' => 'Blue',
+    'green' => 'Green',
+
     'off' => 'off',
     'categories' => 'Categories',
     'winter' => 'Winter',
@@ -74,7 +133,7 @@ return [
             'old_price' => '€15.99',
             'discount' => '75%',
         ],
-        
+
             18 => [
                 'name' => 'Laptop',
                 'description' => 'Thinkpad Lenovo T480, 120GB memory, 8GB RAM',

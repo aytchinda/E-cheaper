@@ -5,12 +5,14 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CompareController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -99,6 +101,10 @@ Route::get('lang/{locale}', function ($locale) {
 Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 
+
+Route::post('/admin/notifications/read/{id}', [DashboardController::class, 'markNotificationAsRead'])->name('admin.notifications.read');
+Route::get('admin/orders/{order}/details', [OrderController::class, 'getOrderDetails'])->name('admin.orders.details');
+Route::get('admin/orders/{order}/details', [OrderController::class, 'showOrderDetails'])->name('admin.orders.show');
 
 
 

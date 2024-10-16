@@ -6,8 +6,10 @@ use App\Models\Address;
 use App\Models\Carrier;
 use App\Models\Order;
 use App\Models\OrderDetails;
+use App\Models\Role;
 use App\Models\Settings;
 use App\Models\User;
+use App\Notifications\AdminOrderNotification;
 use App\Services\CartService;
 use App\Services\StripeService;
 use Illuminate\Http\Request;
@@ -107,7 +109,7 @@ class CheckoutController extends Controller
         $stripe = new \Stripe\StripeClient($this->stripeService->getPrivateKey());
 
         $order = Order::find($orderID);
-        $amount = intval($order->order_cost_ttc * 100,0);
+        $amount = intval($order->order_cost_ttc * 100, 0);
 
         $paymentIntent = $stripe->paymentIntents->create([
             'amount' => $amount,
@@ -126,25 +128,26 @@ class CheckoutController extends Controller
         ];
     }
 
-    public function paymentSuccess(Request $request){
-         $stripe_payment_intent = $request->payment_intent_client_secret;
-         $redirect_status = $request->redirect_status;
+    public function paymentSuccess(Request $request)
+    {
+        $stripe_payment_intent = $request->payment_intent_client_secret;
+        $redirect_status = $request->redirect_status;
 
-         if($redirect_status == "succeeded"){
-             $order = Order::where([
+        if ($redirect_status == "succeeded") {
+            $order = Order::where([
 
-                'isPaid'=>false,
-                'stripe_payment_intent'=> $stripe_payment_intent
-                ])->first();
+                'isPaid' => false,
+                'stripe_payment_intent' => $stripe_payment_intent
+            ])->first();
 
-             if($order){
+            if ($order) {
                 $order->isPaid = true;
-             $order->save();
-             }
+                $order->save();
+            }
 
-         }
-         return view('cheaper.ordercompleted',['order' => $order]);
         }
+        return view('cheaper.ordercompleted', ['order' => $order]);
+    }
 
     protected function createOrder($billing_address, $shipping_address)
     {
@@ -152,9 +155,11 @@ class CheckoutController extends Controller
         $order = new Order();
         $user = Auth::user();
         $carrier = Session::get('carrier', Carrier::first());
-        $taxerate = 0.21;
 
+        // Taux de taxe : 21%
+        $taxRate = 0.21;
 
+        // Calcul du sous-total HT
         $order->clientName = $user->name;
         $order->billing_address = $billing_address;
         $order->shipping_address = $shipping_address;
@@ -162,12 +167,17 @@ class CheckoutController extends Controller
         $order->carrier_price = $carrier->price;
         $order->quantity = $cart['cart_count'];
         $order->order_cost = $cart['sub_total_with_shipping'];
-        $order->taxe = $taxerate * $cart['sub_total_with_shipping'];
-        $order->order_cost_ttc = $cart['sub_total_with_shipping'] + $order->taxe;
+
+        // Calcul de la taxe
+        $order->taxe = $taxRate * $cart['sub_total_with_shipping'];
+
+        // Calcul du total TTC
+        $order->order_cost_ttc = $order->order_cost + $order->taxe + $carrier->price;
+
         $order->payment_method = "Stripe";
+        $order->save();
 
-        $order->save(); // Correction ici
-
+        // Enregistrer les détails des articles
         foreach ($cart['items'] as $item) {
             $orderDetails = new OrderDetails();
             $orderDetails->product_name = $item['product']['name'];
@@ -175,13 +185,26 @@ class CheckoutController extends Controller
             $orderDetails->soldePrice = $item['product']['soldePrice'];
             $orderDetails->regularPrice = $item['product']['regularPrice'];
             $orderDetails->quantity = $item['quantity'];
-            $orderDetails->taxe = $taxerate * $item['product']['soldePrice'];
+
+            // Calcul de la taxe pour chaque produit
+            $orderDetails->taxe = $taxRate * $item['product']['soldePrice'];
+
+            // Calcul du sous-total HT et TTC pour chaque produit
             $orderDetails->sub_total_ht = $item['product']['soldePrice'] * $item['quantity'];
             $orderDetails->sub_total_ttc = $orderDetails->sub_total_ht + $orderDetails->taxe;
+
             $orderDetails->order_id = $order->id;
             $orderDetails->save();
         }
 
+        // Après la création de la commande dans la méthode createOrder
+        $admins = Role::where('value', 'ROLE_ADMIN')->first()->users;
+        foreach ($admins as $admin) {
+            $admin->notify(new AdminOrderNotification($order));
+        }
+
         return $order->id;
     }
+
+
 }

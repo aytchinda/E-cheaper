@@ -142,8 +142,8 @@
                     </div>
 
                     <!-- Boutons pour changer la vue -->
-                    <button id="grid-view-btn" class="btn btn-outline-secondary">{{ __('messages.grid') }}</button>
-                    <button id="list-view-btn" class="btn btn-outline-secondary">{{ __('messages.list') }}</button>
+                    <button id="grid-view-btn" class="btn btn-outline-secondary">{{ (' afficher la grille') }}</button>
+                    <button id="list-view-btn" class="btn btn-outline-secondary">{{ ('afficher la liste') }}</button>
                 </div>
 
                 <form action="" class="d-flex gap-1">

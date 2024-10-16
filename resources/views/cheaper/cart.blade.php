@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    Cart | Cheaper
+    {{ __('messages.cart') }} | Cheaper
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <div class="container my-5">
-        <h2 class="text-center mb-5 fw-bold">Votre Panier</h2>
+        <h2 class="text-center mb-5 fw-bold">{{ __('messages.cart') }}</h2>
 
         @if (session('success'))
             <div class="alert alert-success text-center">
@@ -23,12 +23,12 @@
                 <table class="table align-middle text-center">
                     <thead class="table-light">
                         <tr>
-                            <th scope="col">Produit</th>
-                            <th scope="col">Nom du produit</th>
-                            <th scope="col">Prix</th>
-                            <th scope="col">Quantité</th>
-                            <th scope="col">Total</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">{{ __('messages.product') }}</th>
+                            <th scope="col">{{ __('messages.product_name') }}</th>
+                            <th scope="col">{{ __('messages.price') }}</th>
+                            <th scope="col">{{ __('messages.quantity') }}</th>
+                            <th scope="col">{{ __('messages.total') }}</th>
+                            <th scope="col">{{ __('messages.action') }}</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -41,9 +41,9 @@
                                             : $item['product']['imageUrls'];
                                     @endphp
                                     <img src="{{ asset('storage/' . trim($imageUrl, '["]')) }}" class="rounded shadow-sm"
-                                        alt="{{ $item['product']['name'] }}" style="width: 70px; height: auto;">
+                                        alt="{{ __('messages.products.' . $item['product']['id'] . '.name') }}" style="width: 70px; height: auto;">
                                 </td>
-                                <td class="fw-semibold">{{ $item['product']['name'] }}</td>
+                                <td class="fw-semibold">{{ __('messages.products.' . $item['product']['id'] . '.name') }}</td>
                                 <td class="product-price text-success fw-bold">
                                     €{{ number_format($item['product']['price'], 2, ',', ' ') }}
                                 </td>
@@ -75,12 +75,12 @@
             </div>
 
             <div class="d-flex align-items-center my-4">
-                <h4 class="mb-0 me-2">Carrier:</h4>
+                <h4 class="mb-0 me-2">{{ __('messages.carrier') }}:</h4>
                 <div>
                     <form action="{{ route('cart.index') }}" method="GET" class="d-flex align-items-center">
                         <select class="form-control form-select-sm w-auto" name="carrier_id" id="carrier_id"
                             onchange="this.form.submit()">
-                            <option value="">Sélectionnez un transporteur</option>
+                            <option value="">{{ __('messages.select_carrier') }}</option>
                             @foreach ($carriers as $carrier)
                                 <option value="{{ $carrier->id }}"
                                     {{ $selectedCarrier && $selectedCarrier->id == $carrier->id ? 'selected' : '' }}>
@@ -95,33 +95,33 @@
 
             <!-- Total du panier -->
             <div class="text-end my-4">
-                <h4>Sous Total du Panier:
+                <h4>{{ __('messages.subtotal') }}:
                     <span class="text-success fw-bold" id="cart-total">
                         €{{ number_format(array_sum(array_column(session()->get('cart')['items'], 'sub_total')), 2, ',', ' ') }}
                     </span>
                 </h4>
 
-                <h4>Shipping:
+                <h4>{{ __('messages.shipping') }}:
                     <span
-                        id="carrier-name">{{ $selectedCarrier ? $selectedCarrier->name : 'Sélectionnez un transporteur' }}</span>
+                        id="carrier-name">{{ $selectedCarrier ? $selectedCarrier->name : __('messages.select_carrier') }}</span>
                     - <span
                         id="shipping-price">€{{ $selectedCarrier ? number_format($selectedCarrier->price, 2, ',', ' ') : '' }}</span>
                 </h4>
 
-                <h4>Total à Payer:
+                <h4>{{ __('messages.total_to_pay') }}:
                     <span class="text-success fw-bold" id="total-price">
                         €{{ number_format(array_sum(array_column(session()->get('cart')['items'], 'sub_total')), 2, ',', ' ') }}
                     </span>
                 </h4>
 
                 <form action="{{ route('checkout') }}" method="GET">
-                    <button type="submit" class="btn btn-primary">Passer à la caisse</button>
+                    <button type="submit" class="btn btn-primary">{{ __('messages.proceed_to_checkout') }}</button>
                 </form>
             </div>
         @else
             <div class="text-center my-5">
-                <h4 class="text-muted">Votre panier est vide.</h4>
-                <a href="{{ route('shop') }}" class="btn btn-outline-primary mt-3">Continuer vos achats</a>
+                <h4 class="text-muted">{{ __('messages.empty_cart') }}</h4>
+                <a href="{{ route('shop') }}" class="btn btn-outline-primary mt-3">{{ __('messages.continue_shopping') }}</a>
             </div>
         @endif
     </div>
@@ -223,6 +223,5 @@
             updateTotalPrice();
         });
     </script>
-
 
 @endsection
